@@ -1,0 +1,28 @@
+
+# Entornos virtuales
+vision_tp_final/
+venv/
+.venv/
+env/
+
+# Python cache
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Hugging Face / datasets pesados
+data/hf_cache/
+.cache/
+*.parquet
+*.arrow
+
+# Outputs pesados
+outputs/
+
+# Sistema
+.DS_Store
+Thumbs.db
