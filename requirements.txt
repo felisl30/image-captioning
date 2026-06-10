@@ -1,0 +1,32 @@
+# ── Core DL ──────────────────────────────────────────────────────────────────
+torch>=2.1.0
+torchvision>=0.16.0
+
+# ── HuggingFace ───────────────────────────────────────────────────────────────
+transformers>=4.37.0          # BlipForConditionalGeneration, BlipProcessor
+datasets>=2.18.0              # load_dataset("itsanmolgupta/mimic-cxr-dataset")
+huggingface-hub>=0.21.0       # descarga de pesos y datasets
+
+# ── Interpretabilidad ─────────────────────────────────────────────────────────
+grad-cam>=1.5.0               # pytorch-grad-cam: GradCAM + vit_reshape_transform
+
+# ── Métricas NLG ─────────────────────────────────────────────────────────────
+nltk>=3.8.1                   # tokenización para BLEU/METEOR
+pycocoevalcap>=1.2            # BLEU-4, CIDEr, METEOR
+
+# ── Visualización ────────────────────────────────────────────────────────────
+matplotlib>=3.8.0
+Pillow>=10.0.0                # PIL: .convert("RGB"), Image ops
+
+# ── Datos / utilidades ────────────────────────────────────────────────────────
+numpy>=1.26.0
+pandas>=2.1.0                 # tablas de métricas y CSVs
+scipy>=1.12.0                 # correlación de Pearson en spatial_metrics
+
+# ── Notebooks ────────────────────────────────────────────────────────────────
+jupyter>=1.0.0
+ipykernel>=6.29.0
+ipywidgets>=8.1.0             # progress bars en notebooks (datasets lo usa)
+
+# ── Aceleración de descarga de datasets ──────────────────────────────────────
+pyarrow>=15.0.0               # lectura de Parquet (requerido por datasets)

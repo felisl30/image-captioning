@@ -1,28 +1,41 @@
-
-# Entornos virtuales
+# ── Entornos virtuales ────────────────────────────────────────────────────────
 vision_tp_final/
 venv/
 .venv/
 env/
 
-# Python cache
+# ── Python ────────────────────────────────────────────────────────────────────
 __pycache__/
 *.py[cod]
+*.pyo
 .pytest_cache/
 .mypy_cache/
 
-# Jupyter
+# ── Jupyter ───────────────────────────────────────────────────────────────────
 .ipynb_checkpoints/
 
-# Hugging Face / datasets pesados
+# ── Modelos (pesos — demasiado pesados para git) ─────────────────────────────
+models/blip_base/
+models/blip_finetuned/
+*.safetensors
+*.bin
+*.pt
+*.pth
+
+# ── HuggingFace / datasets ────────────────────────────────────────────────────
 data/hf_cache/
 .cache/
 *.parquet
 *.arrow
 
-# Outputs pesados
+# ── Outputs generados (regenerables corriendo los notebooks) ─────────────────
 outputs/
 
-# Sistema
+# ── Splits (pushear solo cuando estén generados con el dataset completo) ──────
+# Comentar estas líneas una vez generados los splits reales:
+data/splits/
+data/selected_indices.json
+
+# ── Sistema ───────────────────────────────────────────────────────────────────
 .DS_Store
 Thumbs.db

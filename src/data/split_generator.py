@@ -4,12 +4,12 @@ from src.data.utils import save_json, get_valid_indices
 
 def compute_split_sizes(
     n_valid,
-    train_size=10000,
-    val_size=1000,
-    test_size=1000,
+    train_size=24000,
+    val_size=4500,
+    test_size=1500,
     selected_size=30,
     auto_shrink=True,
-    train_ratio=0.70,
+    train_ratio=0.80,
     val_ratio=0.15
 ):
     """
@@ -47,9 +47,9 @@ def compute_split_sizes(
 def generate_splits(
     hf_split,
     text_col="impression",
-    train_size=10000,
-    val_size=1000,
-    test_size=1000,
+    train_size=24000,
+    val_size=4500,
+    test_size=1500,
     selected_size=30,
     seed=42,
     output_dir="data/splits",
