@@ -82,3 +82,19 @@ outputs/
 __pycache__/
 *.pyc
 .ipynb_checkpoints/
+
+# Local debug / heavy artifacts
+data/hf_cache/
+data/backups/
+models/
+outputs/
+__pycache__/
+.ipynb_checkpoints/
+
+# Local debug / heavy artifacts
+data/hf_cache/
+data/backups/
+models/
+outputs/
+__pycache__/
+.ipynb_checkpoints/
