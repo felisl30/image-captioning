@@ -207,8 +207,8 @@ save_model(model, processor, output_dir / f"epoch_{epoch}")
 Permite correr el fine-tuning desde consola o desde el notebook con `!python -m src.models.finetuner ...`.
 
 Argumentos mínimos con `argparse`:
-- `--train-indices` — path a `data/splits/train_sub_indices.json`
-- `--val-indices` — path a `data/splits/val_sub_indices.json`
+- `--train-indices` — path a `data/splits/train_indices.json`
+- `--val-indices` — path a `data/splits/val_indices.json`
 - `--output-dir` — path a `models/blip_finetuned/`
 - `--epochs` — int, default 3
 - `--batch-size` — int, default 4 (en Kaggle T4 podés subir a 8)
