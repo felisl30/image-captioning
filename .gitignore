@@ -39,3 +39,46 @@ outputs/
 # ── Sistema ───────────────────────────────────────────────────────────────────
 .DS_Store
 Thumbs.db
+data/backups/
+models/
+*.pyc
+
+# Local heavy artifacts
+data/hf_cache/
+data/backups/
+models/
+outputs/
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Local heavy artifacts
+data/hf_cache/
+data/backups/
+models/
+outputs/
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Local heavy artifacts
+data/hf_cache/
+data/backups/
+models/
+outputs/
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Local heavy artifacts
+data/hf_cache/
+data/backups/
+models/
+outputs/
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
