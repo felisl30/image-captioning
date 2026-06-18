@@ -149,3 +149,139 @@
 #
 # TODO: implementar esta función.
 """
+import torch
+from pytorch_grad_cam import GradCAM
+from transformers import BlipForConditionalGeneration, BlipProcessor
+
+from src.interpretability.cross_attention import merge_subword_attentions
+
+
+def blip_vit_reshape_transform(tensor, height=24, width=24):
+    """Reshape ViT token sequence → (B, C, H, W) descartando el token CLS.
+       pytorch-grad-cam espera formato (B, C, H, W).
+       En transformers 5.x layer_norm1 puede recibir (S, C) en lugar de (B, S, C)
+       cuando el batch se aplana internamente — se agrega unsqueeze(0) para normalizarlo.
+    """
+    if tensor.dim() == 2:
+        # transformers 5.x: (577, 768) → (1, 577, 768)
+        tensor = tensor.unsqueeze(0)
+    result = tensor[:, 1:, :]  # saco CLS → (B, 576, 768)
+    result = result.reshape(result.size(0), height, width, result.size(2))  # (B, 24, 24, 768)
+    result = result.transpose(2, 3).transpose(1, 2)  # (B, 768, 24, 24)
+    return result
+
+
+class TokenTarget:
+    """Target para Grad-CAM: logit del token en la última posición del decoder."""
+    def __init__(self, token_id: int):
+        self.token_id = token_id #guardo token
+
+    def __call__(self, model_output):
+        # pytorch-grad-cam itera sobre el batch al computar el loss, por lo que
+        # model_output llega sin dimensión de batch: (seq_len, vocab_size).
+        if model_output.dim() == 2:
+            return model_output[-1, self.token_id]
+        # fallback si llegara con batch: (batch, seq_len, vocab_size)
+        return model_output[:, -1, self.token_id]
+
+
+class BLIPGradCAMWrapper(torch.nn.Module):
+    """Wrapper sobre BLIP para exponer un forward que devuelve logits planos.
+       capa de abstraccion, hace de "adaptador" entre blip y gradcam
+    """
+
+    def __init__(self, model: BlipForConditionalGeneration, input_ids: torch.Tensor):
+        super().__init__()
+        self.model = model
+        self.input_ids = input_ids
+
+    def forward(self, pixel_values: torch.Tensor):
+        outputs = self.model(
+            pixel_values=pixel_values,
+            input_ids=self.input_ids,
+        )
+        return outputs.logits  # (batch, seq_len, vocab_size)
+
+
+def _gradcam_single(
+    model: BlipForConditionalGeneration,
+    processor: BlipProcessor,
+    pixel_values: torch.Tensor,
+    generated_ids: torch.Tensor,
+    device: str,
+) -> dict:
+    """Computa Grad-CAM para una sola imagen (pixel_values ya procesado)."""
+    token_ids = generated_ids[0][1:-1]  # sin BOS ni EOS
+    tokens = processor.tokenizer.convert_ids_to_tokens(token_ids)
+    n = len(tokens)
+
+    target_layer = [model.vision_model.encoder.layers[-1].layer_norm1]
+
+    subword_maps = []
+    for t in range(n):
+        input_ids_t = generated_ids[:, : t + 2].to(device)
+        wrapper = BLIPGradCAMWrapper(model, input_ids=input_ids_t)
+
+        target = TokenTarget(token_id=token_ids[t].item())
+
+        grayscale_cam = None
+        try:
+            with GradCAM(
+                model=wrapper,
+                target_layers=target_layer,
+                reshape_transform=blip_vit_reshape_transform,
+            ) as cam:
+                grayscale_cam = cam(input_tensor=pixel_values, targets=[target])
+        except Exception as e:
+            raise RuntimeError(f"GradCAM falló en token t={t} ('{tokens[t]}'): {e}") from e
+
+        if grayscale_cam is None:
+            raise RuntimeError(f"GradCAM retornó None en token t={t} ('{tokens[t]}'). El context manager suprimió una excepción.")
+
+        heatmap = torch.tensor(grayscale_cam[0]).unsqueeze(0).unsqueeze(0)
+        heatmap = torch.nn.functional.interpolate(
+            heatmap, size=(24, 24), mode="bilinear", align_corners=False
+        ).squeeze().numpy()
+
+        subword_maps.append(heatmap)
+
+    return merge_subword_attentions(tokens, subword_maps)
+
+
+def compute_gradcam(
+    model: BlipForConditionalGeneration,
+    processor: BlipProcessor,
+    images: list,
+    device: str = "cpu",
+) -> list:
+    """Computa mapas Grad-CAM por palabra para un batch de imágenes.
+
+    Devuelve el mismo formato que eval_and_extract_cross_att: lista de dicts
+    {"caption": str, "maps": [(palabra, array(24,24)), ...]}, uno por imagen.
+
+    Args:
+        model: BlipForConditionalGeneration cargado.
+        processor: BlipProcessor correspondiente.
+        images: lista de PIL Images (se convierten a RGB internamente).
+        device: "cpu" o "cuda".
+
+    Returns:
+        List[dict]: un dict por imagen con claves "caption" y "maps".
+    """
+    model.eval()
+    images = [img.convert("RGB") for img in images]
+
+    inputs = processor(images=images, return_tensors="pt").to(device)
+
+    captions_att = []
+    for i, image in enumerate(images):
+        pixel_values = inputs["pixel_values"][i].unsqueeze(0)  # (1, 3, 384, 384)
+
+        single_inputs = processor(images=image, return_tensors="pt").to(device)
+        with torch.no_grad():
+            generated_ids = model.generate(**single_inputs, max_new_tokens=40)
+
+        result = _gradcam_single(model, processor, pixel_values, generated_ids, device)
+        captions_att.append(result)
+
+    return captions_att

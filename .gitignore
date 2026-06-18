@@ -33,8 +33,8 @@ outputs/
 
 # ── Splits (pushear solo cuando estén generados con el dataset completo) ──────
 # Comentar estas líneas una vez generados los splits reales:
-data/splits/
-data/selected_indices.json
+# data/splits/
+# data/selected_indices.json
 
 # ── Sistema ───────────────────────────────────────────────────────────────────
 .DS_Store

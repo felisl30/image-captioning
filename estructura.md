@@ -18,9 +18,9 @@ from datasets import load_dataset
 ds = load_dataset("itsanmolgupta/mimic-cxr-dataset")
 ```
 
-Los campos `findings` (descripción detallada) e `impression` (conclusión resumida) se pueden usar
-indistintamente como texto de referencia. Se recomienda usar `findings` para el fine-tuning
-y `impression` para evaluación cualitativa, dado que es más concisa y comparable a lo que BLIP generaría.
+Para el fine-tuning se usa `impression` como target (es corta y coincide con el estilo de caption de BLIP).
+`findings` es demasiado larga y detallada para ser un target de generación útil.
+`impression` también se usa como referencia para evaluación con BLEU/CIDEr/METEOR.
 
 ---
 
@@ -68,9 +68,10 @@ blip-interpretabilidad/
 │   │   └── finetuner.py               ← Loop de entrenamiento, AdamW lr=1e-5, checkpoints
 │   │
 │   ├── interpretability/
-│   │   ├── cross_attention.py         ← Extracción de mapas de cross-attention via forward hooks
-│   │   ├── gradcam.py                 ← Grad-CAM para ViT usando pytorch-grad-cam + vit_reshape_transform
-│   │   └── rollout.py                 ← (Opcional) Attention Rollout para combinar capas
+│   │   ├── cross_att_logits.py        ← Pipeline principal: logits Q·K pre-softmax por palabra (⚠️ pendiente validación profesor)
+│   │   ├── cross_attention.py         ← Pesos post-softmax via forward hooks (referencia; limitación: mapas uniformes sobre 576 tokens)
+│   │   ├── encoder_attention.py       ← Auto-atención CLS→patches del encoder ViT (saliencia global, no word-specific)
+│   │   └── gradcam.py                 ← Grad-CAM para ViT usando pytorch-grad-cam + vit_reshape_transform
 │   │
 │   ├── visualization/
 │   │   ├── heatmap.py                 ← Superposición de heatmap sobre imagen
@@ -156,11 +157,14 @@ blip-interpretabilidad/
 
 ### `src/interpretability/`
 
+> **Estado (2026-06-18):** pipeline de logits Q·K implementado y funcionando. Se usa `cross_att_logits.py` como señal principal. Se está esperando validación del profesor antes de integrarlo en los notebooks 02 y 04. Si no es aceptable, la alternativa es Grad-CAM + encoder attention. Ver `docs/respuesta_profesor_cross_attention.txt` y `docs/cross_att_logits_integracion.md`.
+
 | Archivo | Descripción |
 |---|---|
-| `cross_attention.py` | Registra un `register_forward_hook` sobre la capa de cross-attention de la última capa del decoder de BLIP (o usa `output_attentions=True` en `generate()`). Extrae tensores de shape `(batch, n_heads, T_caption, 196)`, promedia sobre heads, hace reshape a 14×14 y upscale bilineal a 224×224. Devuelve un dict `{palabra: heatmap_224x224}`. |
-| `gradcam.py` | Usa `pytorch-grad-cam` con `GradCAM(model, target_layers=[...])` y `vit_reshape_transform` aplicado al encoder ViT. Para cada palabra del caption, define un `ClassifierOutputTarget` custom que apunta al logit de ese token y corre `cam(input_tensor, targets=[...])` para obtener el mapa 224×224. |
-| `rollout.py` | *(Opcional)* Implementa Attention Rollout (Abnar & Zuidema, ACL 2020) combinando los mapas de atención de todas las capas del decoder mediante multiplicación matricial recursiva. Útil si los heatmaps de la última capa resultan difusos. |
+| `cross_att_logits.py` | **Pipeline principal de interpretabilidad por palabra.** Captura Q y K proyectados vía hooks sobre `crossattention.self.query` y `.key`, calcula `Q·K^T/√d` sin softmax. Produce mapas distintos por palabra, evitando el aplastamiento que causa el softmax sobre 576 tokens. Misma firma de salida que `cross_attention.py`. ⚠️ Pendiente confirmación del profesor de que es válido para el informe. |
+| `cross_attention.py` | Pesos de atención post-softmax vía forward hook sobre `crossattention.self`. Limitación conocida: el softmax sobre 576 patches produce pesos ≈ 1/576 para todos los tokens, resultando en mapas visualmente idénticos entre palabras. Se mantiene como referencia y para documentar la limitación. |
+| `encoder_attention.py` | Auto-atención CLS→patches del encoder ViT (`model.vision_model(..., output_attentions=True)`). Saliencia global de la imagen, no word-specific. Útil para comparar foco visual del encoder antes/después del fine-tuning. |
+| `gradcam.py` | Grad-CAM sobre el encoder ViT usando `pytorch-grad-cam` + `vit_reshape_transform` custom para 24×24 (BLIP usa 384×384, no 224×224). Señal directa de qué regiones contribuyen a la predicción. |
 
 ---
 
@@ -239,12 +243,10 @@ blip-interpretabilidad/
 
 El dataset tiene dos campos de texto:
 
-| Campo | Contenido | Longitud típica | Uso recomendado |
+| Campo | Contenido | Longitud típica | Uso |
 |---|---|---|---|
-| `findings` | Descripción detallada hallazgo por hallazgo | Larga (hasta 1.5k chars) | Fine-tuning (target de generación) |
-| `impression` | Conclusión clínica resumida | Corta (1–3 oraciones) | Evaluación cualitativa, comparación con captions generados |
-
-Para el fine-tuning se recomienda usar `findings` como texto objetivo, ya que es más descriptivo y entrena al modelo a generar lenguaje médico detallado. Para evaluar si el modelo generó algo médicamente coherente, comparar el caption generado con `impression` es más intuitivo.
+| `findings` | Descripción detallada hallazgo por hallazgo | Larga (hasta 1.5k chars) | No usar como target — demasiado larga para el estilo de BLIP |
+| `impression` | Conclusión clínica resumida | Corta (1–3 oraciones) | **Target del fine-tuning** y referencia para BLEU/CIDEr/METEOR |
 
 ---
 

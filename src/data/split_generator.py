@@ -54,7 +54,8 @@ def generate_splits(
     seed=42,
     output_dir="data/splits",
     selected_output="data/selected_indices.json",
-    auto_shrink=True
+    auto_shrink=True,
+    excluded_indices=None,
 ):
     """
     Genera splits reproducibles usando índices.
@@ -68,9 +69,17 @@ def generate_splits(
     - data/splits/val_indices.json
     - data/splits/test_indices.json
     - data/selected_indices.json
+
+    Args:
+        excluded_indices: lista de índices a excluir antes de splitear
+            (por ejemplo los índices reservados para visual test).
     """
 
     valid_indices = get_valid_indices(hf_split, text_col=text_col)
+
+    if excluded_indices:
+        excluded_set = set(excluded_indices)
+        valid_indices = [i for i in valid_indices if i not in excluded_set]
 
     n_valid = len(valid_indices)
 
