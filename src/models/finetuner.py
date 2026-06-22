@@ -32,6 +32,7 @@ import json
 import logging
 import math
 import random
+from contextlib import nullcontext
 from pathlib import Path
 from typing import Any
 
@@ -236,6 +237,8 @@ def train_one_epoch(
     device: str,
     max_batches: int | None = None,
     grad_clip_norm: float = 1.0,
+    grad_accum_steps: int = 1,
+    scaler: torch.cuda.amp.GradScaler | None = None,
 ) -> float:
     """Entrena una época.
 
@@ -247,6 +250,8 @@ def train_one_epoch(
         device: device de ejecución.
         max_batches: si no es None, corta la época tras esa cantidad de batches.
         grad_clip_norm: norma máxima para clipping de gradientes.
+        grad_accum_steps: cantidad de micro-batches antes de hacer optimizer.step().
+        scaler: GradScaler para AMP. None desactiva AMP.
 
     Returns:
         Loss promedio de la época.
@@ -257,6 +262,7 @@ def train_one_epoch(
     n_batches = 0
 
     trainable_params = [p for p in model.parameters() if p.requires_grad]
+    amp_ctx = torch.cuda.amp.autocast if scaler is not None else nullcontext
 
     optimizer.zero_grad(set_to_none=True)
 
@@ -266,19 +272,30 @@ def train_one_epoch(
 
         model_inputs = prepare_batch(batch, device)
 
-        outputs = model(**model_inputs)
-        loss = outputs.loss
+        with amp_ctx():
+            outputs = model(**model_inputs)
+            loss = outputs.loss
 
         if not torch.isfinite(loss):
             raise FloatingPointError(f"Loss no finita en train step {step}: {loss}")
 
-        loss.backward()
+        scaled_loss = loss / grad_accum_steps
+        if scaler is not None:
+            scaler.scale(scaled_loss).backward()
+        else:
+            scaled_loss.backward()
 
-        clip_grad_norm_(trainable_params, max_norm=grad_clip_norm)
-
-        optimizer.step()
-        scheduler.step()
-        optimizer.zero_grad(set_to_none=True)
+        if step % grad_accum_steps == 0:
+            if scaler is not None:
+                scaler.unscale_(optimizer)
+                clip_grad_norm_(trainable_params, max_norm=grad_clip_norm)
+                scaler.step(optimizer)
+                scaler.update()
+            else:
+                clip_grad_norm_(trainable_params, max_norm=grad_clip_norm)
+                optimizer.step()
+            scheduler.step()
+            optimizer.zero_grad(set_to_none=True)
 
         total_loss += float(loss.detach().cpu())
         n_batches += 1
@@ -289,6 +306,19 @@ def train_one_epoch(
             max_batches if max_batches is not None else len(dataloader),
             float(loss.detach().cpu()),
         )
+
+    # flush gradientes acumulados si los batches no son múltiplo de grad_accum_steps
+    if n_batches % grad_accum_steps != 0:
+        if scaler is not None:
+            scaler.unscale_(optimizer)
+            clip_grad_norm_(trainable_params, max_norm=grad_clip_norm)
+            scaler.step(optimizer)
+            scaler.update()
+        else:
+            clip_grad_norm_(trainable_params, max_norm=grad_clip_norm)
+            optimizer.step()
+        scheduler.step()
+        optimizer.zero_grad(set_to_none=True)
 
     if n_batches == 0:
         raise RuntimeError("train_one_epoch no procesó ningún batch.")
@@ -301,7 +331,8 @@ def eval_one_epoch(
     dataloader: DataLoader,
     device: str,
     max_batches: int | None = None,
-) -> float:
+    use_amp: bool = False,
+) -> tuple[float, float]:
     """Evalúa una época sin gradientes.
 
     Args:
@@ -309,14 +340,20 @@ def eval_one_epoch(
         dataloader: DataLoader de validación.
         device: device de ejecución.
         max_batches: si no es None, corta la evaluación tras esa cantidad de batches.
+        use_amp: si True, usa autocast para el forward pass.
 
     Returns:
-        Loss promedio de validación.
+        Tupla (val_loss, token_accuracy). token_accuracy mide el porcentaje de tokens
+        donde argmax(logits) == label, excluyendo padding (-100).
     """
     model.eval()
 
     total_loss = 0.0
+    total_correct = 0
+    total_tokens = 0
     n_batches = 0
+
+    amp_ctx = torch.cuda.amp.autocast if (use_amp and device == "cuda") else nullcontext
 
     with torch.no_grad():
         for step, batch in enumerate(dataloader, start=1):
@@ -325,11 +362,20 @@ def eval_one_epoch(
 
             model_inputs = prepare_batch(batch, device)
 
-            outputs = model(**model_inputs)
+            with amp_ctx():
+                outputs = model(**model_inputs)
+
             loss = outputs.loss
 
             if not torch.isfinite(loss):
                 raise FloatingPointError(f"Loss no finita en val step {step}: {loss}")
+
+            # token accuracy
+            labels = model_inputs["labels"]
+            preds = outputs.logits.argmax(dim=-1)
+            mask = labels != -100
+            total_correct += int((preds[mask] == labels[mask]).sum())
+            total_tokens += int(mask.sum())
 
             total_loss += float(loss.detach().cpu())
             n_batches += 1
@@ -344,21 +390,24 @@ def eval_one_epoch(
     if n_batches == 0:
         raise RuntimeError("eval_one_epoch no procesó ningún batch.")
 
-    return total_loss / n_batches
+    token_acc = total_correct / total_tokens if total_tokens > 0 else 0.0
+    return total_loss / n_batches, token_acc
 
 
 def _effective_num_steps(
     dataloader: DataLoader,
     num_epochs: int,
     max_train_batches: int | None,
+    grad_accum_steps: int = 1,
 ) -> int:
-    """Calcula cantidad efectiva de pasos de entrenamiento."""
+    """Calcula cantidad efectiva de optimizer steps."""
     batches_per_epoch = len(dataloader)
 
     if max_train_batches is not None:
         batches_per_epoch = min(batches_per_epoch, max_train_batches)
 
-    return max(1, batches_per_epoch * num_epochs)
+    optimizer_steps_per_epoch = max(1, batches_per_epoch // grad_accum_steps)
+    return max(1, optimizer_steps_per_epoch * num_epochs)
 
 
 def _save_history(history: list[dict[str, float]], output_dir: Path) -> None:
@@ -385,6 +434,8 @@ def run_finetuning(
     decoder_lr: float = 1e-5,
     weight_decay: float = 0.01,
     warmup_ratio: float = 0.05,
+    grad_accum_steps: int = 1,
+    use_amp: bool = True,
     max_train_batches: int | None = None,
     max_val_batches: int | None = None,
     skip_checkpoint_save: bool = False,
@@ -404,17 +455,24 @@ def run_finetuning(
         decoder_lr: LR para decoder.
         weight_decay: weight decay AdamW.
         warmup_ratio: proporción de warmup.
+        grad_accum_steps: pasos de acumulación de gradientes (batch efectivo = batch_size * grad_accum_steps).
+        use_amp: si True y device==cuda, usa Automatic Mixed Precision (~1.5–2x más rápido).
         max_train_batches: límite de batches train para debug.
         max_val_batches: límite de batches val para debug.
         skip_checkpoint_save: si True, no guarda checkpoints pesados.
 
     Returns:
-        Historial con train_loss y val_loss por época.
+        Historial con métricas por época (loss, perplexidad, token accuracy).
     """
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
 
     model.to(device)
+
+    # AMP solo disponible en CUDA
+    amp_active = use_amp and device == "cuda"
+    scaler = torch.cuda.amp.GradScaler() if amp_active else None
+    logger.info("AMP: %s", "activado" if amp_active else "desactivado")
 
     freeze_stats = freeze_model(model)
 
@@ -429,6 +487,7 @@ def run_finetuning(
         dataloader=train_dataloader,
         num_epochs=num_epochs,
         max_train_batches=max_train_batches,
+        grad_accum_steps=grad_accum_steps,
     )
 
     scheduler = build_scheduler(
@@ -455,32 +514,42 @@ def run_finetuning(
             scheduler=scheduler,
             device=device,
             max_batches=max_train_batches,
+            grad_accum_steps=grad_accum_steps,
+            scaler=scaler,
         )
 
-        val_loss = eval_one_epoch(
+        val_loss, val_token_acc = eval_one_epoch(
             model=model,
             dataloader=val_dataloader,
             device=device,
             max_batches=max_val_batches,
+            use_amp=amp_active,
         )
+
+        val_perplexity = math.exp(min(val_loss, 20.0))  # clamped para evitar overflow
 
         row = {
             "epoch": float(epoch),
             "train_loss": float(train_loss),
             "val_loss": float(val_loss),
             "best_val_loss": float(min(best_val_loss, val_loss)),
+            "val_perplexity": float(val_perplexity),
+            "val_token_acc": float(val_token_acc),
             "trainable_params": freeze_stats["trainable_params"],
             "total_params": freeze_stats["total_params"],
             "trainable_pct": freeze_stats["trainable_pct"],
+            "grad_accum_steps": grad_accum_steps,
         }
 
         history.append(row)
 
         logger.info(
-            "Época %d | train_loss=%.4f | val_loss=%.4f",
+            "Época %d | train_loss=%.4f | val_loss=%.4f | perplexity=%.1f | token_acc=%.3f",
             epoch,
             train_loss,
             val_loss,
+            val_perplexity,
+            val_token_acc,
         )
 
         if not skip_checkpoint_save:
@@ -625,6 +694,17 @@ def parse_args() -> argparse.Namespace:
         help="Proporción de warmup. Default: 0.05.",
     )
     parser.add_argument(
+        "--grad-accum-steps",
+        type=int,
+        default=1,
+        help="Pasos de acumulación de gradientes. Batch efectivo = batch_size * grad_accum_steps. Default: 1.",
+    )
+    parser.add_argument(
+        "--no-amp",
+        action="store_true",
+        help="Desactiva Automatic Mixed Precision. Por defecto AMP está activado en CUDA.",
+    )
+    parser.add_argument(
         "--seed",
         type=int,
         default=42,
@@ -714,6 +794,8 @@ def main() -> None:
         decoder_lr=args.decoder_lr,
         weight_decay=args.weight_decay,
         warmup_ratio=args.warmup_ratio,
+        grad_accum_steps=args.grad_accum_steps,
+        use_amp=not args.no_amp,
         max_train_batches=args.max_train_batches,
         max_val_batches=args.max_val_batches,
         skip_checkpoint_save=args.skip_checkpoint_save,
