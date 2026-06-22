@@ -31,70 +31,15 @@ data/hf_cache/
 # ── Outputs generados (regenerables corriendo los notebooks) ─────────────────
 outputs/
 
-# ── Splits (pushear solo cuando estén generados con el dataset completo) ──────
-# Comentar estas líneas una vez generados los splits reales:
-# data/splits/
-# data/selected_indices.json
+# ── Artefactos pesados locales ────────────────────────────────────────────────
+models/
+data/hf_cache/
+data/backups/
+
+# ── Excepción: código fuente en src/models/ sí debe versionarse ──────────────
+!src/models/
+!src/models/**
 
 # ── Sistema ───────────────────────────────────────────────────────────────────
 .DS_Store
 Thumbs.db
-data/backups/
-models/
-*.pyc
-
-# Local heavy artifacts
-data/hf_cache/
-data/backups/
-models/
-outputs/
-.venv/
-__pycache__/
-*.pyc
-.ipynb_checkpoints/
-
-# Local heavy artifacts
-data/hf_cache/
-data/backups/
-models/
-outputs/
-.venv/
-__pycache__/
-*.pyc
-.ipynb_checkpoints/
-
-# Local heavy artifacts
-data/hf_cache/
-data/backups/
-models/
-outputs/
-.venv/
-__pycache__/
-*.pyc
-.ipynb_checkpoints/
-
-# Local heavy artifacts
-data/hf_cache/
-data/backups/
-models/
-outputs/
-.venv/
-__pycache__/
-*.pyc
-.ipynb_checkpoints/
-
-# Local debug / heavy artifacts
-data/hf_cache/
-data/backups/
-models/
-outputs/
-__pycache__/
-.ipynb_checkpoints/
-
-# Local debug / heavy artifacts
-data/hf_cache/
-data/backups/
-models/
-outputs/
-__pycache__/
-.ipynb_checkpoints/
