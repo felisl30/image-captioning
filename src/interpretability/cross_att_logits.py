@@ -122,3 +122,36 @@ def extract_cross_att_logits(
         results.append(merge_subword_attentions(tokens, subword_maps))
 
     return results
+
+
+def merge_subword_attentions(tokens: list, attention_maps: list) -> dict:
+    """Agrupa subwords con ## y devuelve caption + lista ordenada de (palabra, mapa).
+
+    Preserva orden de aparición y palabras repetidas.
+
+    Returns:
+        {
+            "caption": "no acute no pneumonia",
+            "maps": [("no", array(24,24)), ("acute", array(24,24)), ...]
+        }
+    """
+    merged_tokens = []
+    merged_maps   = []
+
+    for token, attn_map in zip(tokens, attention_maps):
+        if token.startswith("##"):
+            merged_tokens[-1] += token[2:]
+            merged_maps[-1].append(attn_map)
+        else:
+            merged_tokens.append(token)
+            merged_maps.append([attn_map])
+
+    maps_list = [
+        (token, np.mean(maps, axis=0))
+        for token, maps in zip(merged_tokens, merged_maps)
+    ]
+
+    return {
+        "caption": " ".join(merged_tokens),
+        "maps": maps_list,
+    }

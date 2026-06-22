@@ -29,7 +29,7 @@ data/hf_cache/
 *.arrow
 
 # ── Outputs generados (regenerables corriendo los notebooks) ─────────────────
-# outputs/
+outputs/
 
 # ── Artefactos pesados locales ────────────────────────────────────────────────
 models/
