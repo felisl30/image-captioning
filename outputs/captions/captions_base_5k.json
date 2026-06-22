@@ -1,0 +1,1502 @@
+[
+  {
+    "idx": 15399,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "Worsening right pleural effusion and pulmonary edema."
+  },
+  {
+    "idx": 2454,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "Improving right upper lobe opacity likely due to improved aeration. Small bilateral pleural effusions. Right base opacity maybe due to pleural effusion and atelectasis."
+  },
+  {
+    "idx": 5062,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "Basilar atelectasis without definite focal consolidation."
+  },
+  {
+    "idx": 21479,
+    "generated": "a chest xray with a large, white chest",
+    "reference": "Enteric tube now high in position with the side port in the upper to mid thorax. Low lung volumes and persistent streaky bibasilar opacities."
+  },
+  {
+    "idx": 28570,
+    "generated": "a chest xray with a small chest",
+    "reference": "Enteric tube extends below the diaphragm with the tip in the body of the stomach."
+  },
+  {
+    "idx": 13446,
+    "generated": "a chest xray with a radiograph of the chest",
+    "reference": "Interval decrease in the right-sided pleural effusion."
+  },
+  {
+    "idx": 4727,
+    "generated": "a chest with a small chest and a large chest",
+    "reference": "No significant interval change in moderate loculated left hydropneumothorax. Clear right lung."
+  },
+  {
+    "idx": 23700,
+    "generated": "a chest xray with a small chest xray",
+    "reference": "Dense retrocardiac opacity may represent a pleural effusion with atelectasis or consolidation secondary to pneumonia. Consider obtaining a lateral radiograph for better characterization."
+  },
+  {
+    "idx": 502,
+    "generated": "a chest xray with a small, open chest",
+    "reference": "Enteric tube in standard position. Low lung volumes with associated atelectasis and resultant bronchovascular crowding. Left basilar opacities may represent atelectasis, although aspiration or infection is not excluded. Mild pulmonary vascular congestion."
+  },
+  {
+    "idx": 14987,
+    "generated": "a chest xray with a radiograph of the chest",
+    "reference": "Small right pneumothorax, likely unchanged in size since the prior CT. Right basilar opacity, likely aspiration. Early pneumonia cannot be excluded. Orogastric tube with the side port near the gastroesophageal junction. Recommend advancing several centimeters. Results were discussed with Dr. at that time the findings were discovered."
+  },
+  {
+    "idx": 17253,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "Probable left lower lobe atelectasis."
+  },
+  {
+    "idx": 3271,
+    "generated": "a chest xray with a small chest",
+    "reference": "Standard positioning of the endotracheal and enteric tubes."
+  },
+  {
+    "idx": 14441,
+    "generated": "a chest with a radiograph showing the chest and chest",
+    "reference": "No acute cardiopulmonary process."
+  },
+  {
+    "idx": 27722,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "No evidence of acute disease."
+  },
+  {
+    "idx": 28677,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "Right hilar/perihilar opacity may reflect combination of right lower lobe atelectasis and aspiration, although infection or contusion not excluded in appropriate clinical setting."
+  },
+  {
+    "idx": 3292,
+    "generated": "a chest xray with a small, white, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy,",
+    "reference": "NG tube tip over gastric fundus. Left lower lobe collapse and/or consolidation, with apparent leftward shift of the mediastinum. Patchy opacity right base, likely atelectasis. However, it is there clinical concern for aspiration?"
+  },
+  {
+    "idx": 28530,
+    "generated": "a chest xray with a chest xray",
+    "reference": "No acute cardiopulmonary abnormality. No subdiaphragmatic free air."
+  },
+  {
+    "idx": 10888,
+    "generated": "a chest xray with a small, white, lumpy lump",
+    "reference": "Moderate-severe left and small right pleural effusions, cardiomegaly, and pulmonary edema suggestive of volume overload. The combination of atelectasis and pleural effusions obscure the left heart border and left hemidiaphragm, and underlying consolidation is likely."
+  },
+  {
+    "idx": 19361,
+    "generated": "a chest with a small amount of smoke coming out of it",
+    "reference": "Limite study due to patient positioning demonstrates an endotracheal tube in the lower trachea. Enteric tube tip is at the gastroesophageal junction, further advancement is recommended. Evaluation of lung parenchyma and mediastinum is limited due to patient positioning. The right mediastinum and paramediastinal area are abnormal with increased opacities of unknown chronicity. A repeat film is recommended when possible for better assessment. Additionally, comparison to prior studies, if available, would be helpful."
+  },
+  {
+    "idx": 16478,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "As above."
+  },
+  {
+    "idx": 29658,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "No evidence of injury. Widening of the right mediastinum, probably reflecting a cystic lesion. Investigation with chest CT, preferably with intravenous contrast, if possible, is suggested when clinically appropriate."
+  },
+  {
+    "idx": 1214,
+    "generated": "a chest xray with a radiograph of the chest",
+    "reference": "No evidence of larger pleural effusions or pneumonia. No pulmonary edema. No pneumothorax."
+  },
+  {
+    "idx": 16247,
+    "generated": "a chest xray with a small, white, cross section",
+    "reference": "Low lung volumes with mild bibasilar atelectasis."
+  },
+  {
+    "idx": 4988,
+    "generated": "a chest xray with a radiograph of the chest",
+    "reference": "No acute cardiopulmonary process."
+  },
+  {
+    "idx": 21388,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "Cardiomegaly without superimposed acute cardiopulmonary process."
+  },
+  {
+    "idx": 26924,
+    "generated": "a chest xray with a small, white, cross section",
+    "reference": "Mild cardiomegaly, small pleural effusions and lower lobe opacities likely representing atelectasis versus pneumonia. Mild hilar engorgement."
+  },
+  {
+    "idx": 25994,
+    "generated": "a chest xray with a small, white, chest xray",
+    "reference": "Right lower lobe atelectasis. Postoperative appearance of the heart and mediastinum with resolution of pneumomediastinum and pneumopericardium."
+  },
+  {
+    "idx": 21771,
+    "generated": "a chest xray with a small chest xray",
+    "reference": "Tracheostomy tube in good position."
+  },
+  {
+    "idx": 12662,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "No acute cardiopulmonary process."
+  },
+  {
+    "idx": 12502,
+    "generated": "a chest xray with a small, white chest",
+    "reference": "Large right pleural effusion is unchanged since . Small to moderate left pleural effusion is unchanged."
+  },
+  {
+    "idx": 26618,
+    "generated": "a chest xray with a small chest xray",
+    "reference": "No pneumothorax."
+  },
+  {
+    "idx": 23133,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "Prominence of the central pulmonary vasculature suggests vascular congestion, less likely infection."
+  },
+  {
+    "idx": 30308,
+    "generated": "a chest xray with a large, white chest",
+    "reference": "Marked interval decrease in size of the right pleural effusion, now small, with right basilar chest tube in place. No pneumothorax identified. Persistent moderate layering left pleural effusion with left basilar opacity, likely atelectasis."
+  },
+  {
+    "idx": 24430,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "Low lung volumes. Patchy bibasilar opacities could reflect atelectasis but infection cannot be completely excluded. Repeat PA and lateral views with improved inspiratory effort may be helpful for further assessment of the lung bases."
+  },
+  {
+    "idx": 10435,
+    "generated": "a chest xray with a radiograph of the chest",
+    "reference": "Standard positioning of the endotracheal tube. Bibasilar atelectasis. Mild gaseous distention of the stomach. There may be a dilated loop of small bowel in the left upper abdomen. CT abdomen and pelvis is currently pending."
+  },
+  {
+    "idx": 1431,
+    "generated": "a chest xray with a small chest xray",
+    "reference": "New right basilar pneumonia."
+  },
+  {
+    "idx": 13472,
+    "generated": "a chest with a radio screen showing the chest",
+    "reference": "The nasogastric tube terminates in the stomach. Appearances suggest pulmonary vascular congestion."
+  },
+  {
+    "idx": 25442,
+    "generated": "a chest xray with a small, white, cross section",
+    "reference": "Slight improvement in right pleural effusion."
+  },
+  {
+    "idx": 28081,
+    "generated": "a chest xray with a small, white, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy,",
+    "reference": "Stable bilateral pulmonary opacities."
+  },
+  {
+    "idx": 7658,
+    "generated": "a chest xray with a large, white chest",
+    "reference": "Enteric tube terminating in the distal esophagus. Mild pulmonary edema."
+  },
+  {
+    "idx": 12560,
+    "generated": "a chest with a large, white, lumpy, lumpy, lumpy, lumpy, lump",
+    "reference": "Volume loss in both lower lobes. An underlying infectious infiltrate can't be excluded. Appearance is slightly worse compared to prior"
+  },
+  {
+    "idx": 18758,
+    "generated": "a chest with a small, white substance on the chest",
+    "reference": "Low lung volumes, with mild pulmonary edema. A retrocardiac opacity may be due to a combination of atelectasis and edema, but superimposed pneumonia cannot be excluded."
+  },
+  {
+    "idx": 7830,
+    "generated": "a chest xray with a small, open chest",
+    "reference": "No significant interval change compared to the study performed earlier on the same day."
+  },
+  {
+    "idx": 22880,
+    "generated": "a chest with a large, open chest and a small chest",
+    "reference": "Status post left chest tube insertion with no visible pneumothorax. Left chest wall subcutaneous emphysema. Left lower lung atelectasis."
+  },
+  {
+    "idx": 6185,
+    "generated": "a chest xray with a radiograph of the chest",
+    "reference": "No evidence of acute procedure related complication. Bilateral lower lung airspace opacities likely reflective of lavage."
+  },
+  {
+    "idx": 28527,
+    "generated": "a chest radiograph showing the chest and chest",
+    "reference": "Limited exam. Right PICC tip is not definitively identified. Repeat should be considered."
+  },
+  {
+    "idx": 10554,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "Termination point of Dobbhoff line not identified on this film."
+  },
+  {
+    "idx": 14934,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "Cardiomegally and bilateral effusions compatible with CHF."
+  },
+  {
+    "idx": 12370,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "No definite interval change of consolidation in the left mid to lower lung and right lung base mass. Other pulmonary nodules better assessed by prior CT scan."
+  },
+  {
+    "idx": 17828,
+    "generated": "a chest xray with a large chest xray",
+    "reference": "No focal pneumonia or edema. Moderate cardiomegaly, unchanged. Moderate hiatal hernia."
+  },
+  {
+    "idx": 25025,
+    "generated": "a chest xray with a large, white, bone bone",
+    "reference": "Mild cardiomegaly, COPD, otherwise unremarkable."
+  },
+  {
+    "idx": 18106,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "Stable chest findings, no development of pneumothorax. Significant increase of heart shadow."
+  },
+  {
+    "idx": 10903,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "Increase of mild to moderate bibasilar atelectasis since ."
+  },
+  {
+    "idx": 11319,
+    "generated": "a chest with a large, open chest, and a small chest with a small chest",
+    "reference": "Moderate to severe pulmonary edema with small to moderate bilateral pleural effusions. Possibility of superimposed infection would be difficult to exclude."
+  },
+  {
+    "idx": 15886,
+    "generated": "a chest xray with a small, white, cross section",
+    "reference": "No evidence of pneumonia or pulmonary edema. Mild cardiomegaly."
+  },
+  {
+    "idx": 17669,
+    "generated": "a chest xray with a radiograph of the chest",
+    "reference": "Left basal pneumonia. Followup radiograph four weeks after treatment is recommended."
+  },
+  {
+    "idx": 14646,
+    "generated": "a chest xray with a small, white chest",
+    "reference": "ET tube and NG tube in satisfactory position. Interval development of retrocardiac opacity which may reflect atelectasis or aspiration."
+  },
+  {
+    "idx": 4873,
+    "generated": "a chest xray with a small, white, ribring, ribring, and ribring",
+    "reference": "Appropriately positioned pulmonary artery catheter. Otherwise, no significant change from the prior exam."
+  },
+  {
+    "idx": 28384,
+    "generated": "a chest xray with a small, white chest",
+    "reference": "Left PICC and right IJ catheter in appropriate position. Progressing bilateral parenchymal opacities, representing multifocal pneumonia, however superimposed pulmonary edema cannot be excluded."
+  },
+  {
+    "idx": 16061,
+    "generated": "a chest xray with a small chest xray",
+    "reference": "No acute intrathoracic process. Specifically, no radiographic evidence for aspiration."
+  },
+  {
+    "idx": 21648,
+    "generated": "a chest xray with a cross in the middle",
+    "reference": "Improved multi focal airspace opacities since . Improved background mild pulmonary edema. Interval enlargement of small bilateral pleural effusions."
+  },
+  {
+    "idx": 19024,
+    "generated": "a chest xray with a small chest",
+    "reference": "Mild interval improvement of the diffuse bilateral pulmonary edema compared to the prior exam."
+  },
+  {
+    "idx": 19254,
+    "generated": "a chest xray with a small chest xray",
+    "reference": "Enteric tube courses below the diaphragm, out of the field of view. Low lung volumes. Bilateral perihilar opacities suggest mild pulmonary edema. Left base opacity may be due to combination of pleural effusion and atelectasis, underlying aspiration not excluded."
+  },
+  {
+    "idx": 27474,
+    "generated": "a chest with a large, open chest",
+    "reference": "Left greater than right bibasilar atelectasis, less likely developing left lower lobe pneumonia. Recommend follow-up conventional radiographs when feasible. Recommend follow-up conventional radiographs when feasible."
+  },
+  {
+    "idx": 9791,
+    "generated": "a radiologist shows a radiograph of a patient ' s chest",
+    "reference": "Newly placed Dobbhoff tube terminates in the gastric fundus. Clear upper lungs."
+  },
+  {
+    "idx": 23818,
+    "generated": "a chest xray with a radiograph of the chest",
+    "reference": "No pneumothorax after removal of left chest tube."
+  },
+  {
+    "idx": 9276,
+    "generated": "a chest xray with a radiograph of the chest",
+    "reference": "No acute cardiopulmonary process."
+  },
+  {
+    "idx": 84,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "Mildly improved left basilar opacity. Mildly worsened right basilar opacity."
+  },
+  {
+    "idx": 30009,
+    "generated": "a chest xray with a small chest xray",
+    "reference": "Interval development of mild pulmonary interstitial edema. Increased retrocardiac opacification may relate to a combination of edema atelectasis however superimposed consolidation cannot be excluded."
+  },
+  {
+    "idx": 8762,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "Low lung volumes. Otherwise, no acute cardiopulmonary process."
+  },
+  {
+    "idx": 16656,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "Stable appearance of moderate left pleural effusion with atelectasis. No pneumonia."
+  },
+  {
+    "idx": 25840,
+    "generated": "a chest xray with a small chest",
+    "reference": "NG tube with tip just past the GE junction and should be advanced. Appropriate position of the endotracheal tube. Left basilar opacity potentially due to any combination of atelectasis, consolidation or effusion."
+  },
+  {
+    "idx": 11147,
+    "generated": "a chest xray with a large rib fracture",
+    "reference": "No acute cardiopulmonary process."
+  },
+  {
+    "idx": 13608,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "Consolidation in the right lower lobe compatible with known primary malignancy. Possible tiny right effusion. No overt edema."
+  },
+  {
+    "idx": 28029,
+    "generated": "a chest xray with a small bone bone",
+    "reference": "No acute intrathoracic abnormality."
+  },
+  {
+    "idx": 25915,
+    "generated": "a chest xray with a large, white chest",
+    "reference": "Stable right perihilar and increased left suprahilar airspace opacities may be due to infection or aspiration."
+  },
+  {
+    "idx": 25348,
+    "generated": "a chest xray with a small, white chest",
+    "reference": "Dobbhoff tube ends in the stomach. It could be pulled back to avoid bronchial intubation."
+  },
+  {
+    "idx": 29536,
+    "generated": "a chest xray with a small, white, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy,",
+    "reference": "Small right pleural effusion and slight interval increase in subsegmental atelectasis right lung base. Note right-sided PICC line tip now pulled back to level of central subclavian vein on that side"
+  },
+  {
+    "idx": 2289,
+    "generated": "a chest with a large, black and white image of the chest",
+    "reference": "OG tube terminates in the stomach. Stable pulmonary edema with bilateral pleural effusions."
+  },
+  {
+    "idx": 28344,
+    "generated": "a chest xray with a radiograph of the chest",
+    "reference": "No definitive pneumothorax. Right PICC terminating at the level of the right axilla, as before. Slightly increased moderate left pleural effusion and underlying atelectasis or consolidation. Improved right basilar atelectasis."
+  },
+  {
+    "idx": 4477,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "Right PICC retracted with tip in low SVC. Horizontal internal portion of tracheostomy tube may be positional. Please correlate clinically. Persistent pulmonary vascular congestion and mild pulmonary edema."
+  },
+  {
+    "idx": 28846,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "Moderate left pneumothorax, increased compared to prior."
+  },
+  {
+    "idx": 24482,
+    "generated": "a chest xray with a small, white, cross section",
+    "reference": "Slight decrease in conspicuity of lucency along the medial right lung base, possibly a tiny pneumothorax versus extrapleural gas collection. Slight improvement in widespread interstitial opacities. Large quantity of subcutaneous air overlying the chest, decreased on the left, but not significantly changed on the right."
+  },
+  {
+    "idx": 16673,
+    "generated": "a chest xray with a small, open chest",
+    "reference": "Interval increase in small bilateral pleural effusions as well as mild bibasilar atelectasis. A superimposed infectious process cannot be excluded."
+  },
+  {
+    "idx": 19663,
+    "generated": "a chest xray with a radiograph of the chest",
+    "reference": "Possible tiny left apical pneumothorax. Otherwise, no significant change from the prior exam. Results were discussed with Dr. m. on via telephone by Dr. at the time the findings were discovered."
+  },
+  {
+    "idx": 6249,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "Unchanged moderate cardiomegaly. Chronically elevated left hemidiaphragm."
+  },
+  {
+    "idx": 12580,
+    "generated": "a chest xray with a radiograph of the chest",
+    "reference": "No evidence of chronic aspiration."
+  },
+  {
+    "idx": 4743,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "Mild progression of peribronchial infiltration. Superimposed infection is also possible."
+  },
+  {
+    "idx": 18084,
+    "generated": "a chest xray with a large rib fracture",
+    "reference": "No acute cardiopulmonary process. Right PICC tip in the upper SVC."
+  },
+  {
+    "idx": 14981,
+    "generated": "a chest with a large, open chest",
+    "reference": "New airspace opacity in the anterior segment of the right upper lobe is likely post biopsy hemorrhage. No pneumothorax."
+  },
+  {
+    "idx": 7991,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "Bibasilar atelectasis."
+  },
+  {
+    "idx": 15488,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "Unchanged bilateral pleural effusions and bibasilar atelectasis. Superimposed infection cannot be excluded."
+  },
+  {
+    "idx": 15826,
+    "generated": "a chest xray with a large rib fracture",
+    "reference": "Large amount of pneumoperitoneum."
+  },
+  {
+    "idx": 27384,
+    "generated": "a chest with a large, open chest",
+    "reference": "Clear lungs with elevation of the right hemidiaphragm, which is new since the prior radiograph from , and may represent phrenic nerve injury, or an intra-abdominal process resulting in elevation of the hemidiaphragm."
+  },
+  {
+    "idx": 13626,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "Right PICC line lies more distal on the prior film, at the SVC/RA junction. Left lower lobe collapse and/or consolidation similar, possibly slightly more pronounced, than on the prior film. Upper zone redistribution and mild vascular plethora, also may be slightly more pronounced. No overt CHF. Minimal atelectasis at the right lung base is probably also slightly more pronounced."
+  },
+  {
+    "idx": 8967,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "No acute cardiopulmonary process."
+  },
+  {
+    "idx": 23139,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "Left internal jugular central venous catheter tip terminates in the mid SVC. No pneumothorax. Slight interval improvement in mild pulmonary edema with more focal opacities in the right lung suggestive of coexistent multifocal pneumonia. Small right pleural effusion, probably unchanged."
+  },
+  {
+    "idx": 16693,
+    "generated": "a chest xray with a large rib fracture",
+    "reference": "No acute traumatic injury seen."
+  },
+  {
+    "idx": 9571,
+    "generated": "a chest xray with a small chest",
+    "reference": "NG tube in appropriate position in the stomach."
+  },
+  {
+    "idx": 23506,
+    "generated": "a chest xray with a small, white, cross section",
+    "reference": "Moderate pulmonary interstitial edema and small bilateral pleural effusions, worse on the right than the left."
+  },
+  {
+    "idx": 16348,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "NGT has been retracted in the interim, and terminates in the mid to distal esophagus. Consolidations of the bases of lungs bilaterally, may be secondary to aspiration. No traumatic fractures identified. by phone."
+  },
+  {
+    "idx": 5049,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "Improved aeration of the lung bases with increasing consolidation in the right mid-lung. These findings would be atypical for aspiration."
+  },
+  {
+    "idx": 27299,
+    "generated": "a chest xray with a large, white, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy,",
+    "reference": "Chest tube remains in place, increasing evidence of pleural densities surrounding the left hemithorax. Poor inspirational lung volume, as before. No pneumothorax."
+  },
+  {
+    "idx": 21247,
+    "generated": "a chest xray with a small, open chest",
+    "reference": "Findings consistent with pulmonary edema. Enlarged heart compared to the prior study."
+  },
+  {
+    "idx": 3853,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "Interval development of more focal bibasilar airspace opacities which may reflect infection or aspiration superimposed on a background of chronic interstitial lung disease. There may be mild pulmonary vascular congestion."
+  },
+  {
+    "idx": 15135,
+    "generated": "a chest xray with a large, white chest",
+    "reference": "Small right pleural effusion, new in the interval. Innumerable pulmonary metastases without substantial interval change."
+  },
+  {
+    "idx": 3721,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "No acute cardiopulmonary abnormality Severe emphysema"
+  },
+  {
+    "idx": 27603,
+    "generated": "a chest with a small piece of bone",
+    "reference": "No visualized enteric tube."
+  },
+  {
+    "idx": 30344,
+    "generated": "a chest xray with a small, white, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy,",
+    "reference": "No acute cardiopulmonary process."
+  },
+  {
+    "idx": 3058,
+    "generated": "a chest xray with a small chest",
+    "reference": "No significant interval change."
+  },
+  {
+    "idx": 13381,
+    "generated": "a chest xray with a small, white, bone bone",
+    "reference": "Low lung volumes with heterogeneous left lower lobe opacity likely representing atelectasis."
+  },
+  {
+    "idx": 18117,
+    "generated": "a chest with a large, open chest",
+    "reference": "Increased opacity in the right lower lung concerning for pneumonia versus atypical edema. Likely small left pleural effusion. Change in chronic cystic scarring and bronchiectasis, right upper lobe could either be due to colonization versus reactivation tuberculosis. with Dr."
+  },
+  {
+    "idx": 448,
+    "generated": "a chest xray with a radiograph showing the chest and chest",
+    "reference": "Chronic atelectasis with more pronounced left lower lobe volume loss likely reflecting collapse. This could be further evaluated with chest CT."
+  },
+  {
+    "idx": 18070,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "Bilateral lower lung consolidations compatible with developing pneumonia. Over-distention of stomach secondary to postoperative sequelae."
+  },
+  {
+    "idx": 10191,
+    "generated": "a chest radiograph showing the chest and chest",
+    "reference": "with Dr."
+  },
+  {
+    "idx": 5193,
+    "generated": "a chest with a large, open chest",
+    "reference": "No change."
+  },
+  {
+    "idx": 23283,
+    "generated": "a chest xray with a large, white chest",
+    "reference": "Moderate right pneumothorax, explains subcutaneous emphysema. Has there been an attempted central line placement? Mediastinum is neither shifted nor widened. Endotracheal tube in appropriate position. Esophageal tube should be advanced to decompress severely distended stomach."
+  },
+  {
+    "idx": 7846,
+    "generated": "a chest xray with a small white line on the chest",
+    "reference": "No acute cardiopulmonary process."
+  },
+  {
+    "idx": 26221,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "Upper airway not visualized. Clinical correlation is recommended and if concern a dedicated neck/soft tissue radiograph may be obtained. Metastatic disease with hilar lymphadenopathy and new left main bronchus compression. No new focal opacity to suggest pneumonia. with Dr."
+  },
+  {
+    "idx": 19974,
+    "generated": "a chest xray with a large, white, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy,",
+    "reference": "Stable interstitial disease due to lymphangitic metastatic disease."
+  },
+  {
+    "idx": 20667,
+    "generated": "a chest xray with a small, white, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy,",
+    "reference": "Moderate left pleural effusion with associated compressive lower lobe atelectasis. Low lung volumes limits assessment."
+  },
+  {
+    "idx": 946,
+    "generated": "a black and white image of a chest with a large, open lung",
+    "reference": "Unstable moderate cardiomegaly and unchanged moderate pulmonary edema. Unchanged small pleural effusions. Support devices in appropriate positions."
+  },
+  {
+    "idx": 3982,
+    "generated": "a chest xray with a small, white chest",
+    "reference": "Left basilar opacity, probably due to atelectasis, including a suspected small pleural effusion; however other etiologies such as developing pneumonia or aspiration pneumonitis are not excluded by this examination."
+  },
+  {
+    "idx": 15899,
+    "generated": "a chest xray with a large, white chest",
+    "reference": "No evidence of pneumonia."
+  },
+  {
+    "idx": 22905,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "Worsened pulmonary edema. An underlying infectious infiltrate can't be excluded"
+  },
+  {
+    "idx": 28896,
+    "generated": "a chest with a small, open chest",
+    "reference": "No change."
+  },
+  {
+    "idx": 14370,
+    "generated": "a chest with a radiograph showing the chest and chest",
+    "reference": "Pulmonary edema, slightly improved since initial examination of . No major atelectasis identified."
+  },
+  {
+    "idx": 9446,
+    "generated": "a chest xray with a small, white, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy,",
+    "reference": "Persistent small right pneumothorax. Increased streaky density at the lung bases likely representing subsegmental atelectasis."
+  },
+  {
+    "idx": 4297,
+    "generated": "a chest xray with a small, white, cross section",
+    "reference": "Findings suggesting mild-to-moderate pulmonary edema."
+  },
+  {
+    "idx": 18017,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "Tip of a NG tube terminates within the gastric body."
+  },
+  {
+    "idx": 8758,
+    "generated": "a chest xray with a small, white, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy,",
+    "reference": "No significant interval change compared to the prior study."
+  },
+  {
+    "idx": 6674,
+    "generated": "a chest with a radiograph showing the chest and chest",
+    "reference": "No acute cardiopulmonary abnormality."
+  },
+  {
+    "idx": 1692,
+    "generated": "a chest xray with a small, white chest",
+    "reference": "Interval replacement of a right PICC, which now terminates in the low SVC. to Dr. at on , during initial review."
+  },
+  {
+    "idx": 24931,
+    "generated": "a chest radiograph showing the chest and chest",
+    "reference": "Minimal increase of left basilar opacification and small pleural effusion."
+  },
+  {
+    "idx": 14498,
+    "generated": "a chest with a small chest and a small chest",
+    "reference": "Tip of the Dobbhoff tube within the stomach. Increasing small left pleural effusion and associated atelectasis."
+  },
+  {
+    "idx": 20516,
+    "generated": "a black and white photo of a chest",
+    "reference": "Malpositioned left PICC as above. Otherwise unchanged appearance of the heart and lungs."
+  },
+  {
+    "idx": 16352,
+    "generated": "a chest xray with a small chest",
+    "reference": "Enteric tube appears to terminate at about the GE junction."
+  },
+  {
+    "idx": 24815,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "In this patient with chin down, endotracheal tube is probably slightly high in position. D. by , M. D."
+  },
+  {
+    "idx": 20425,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "Pulmonary congestion and mild interstitial edema. No convincing signs of pneumonia."
+  },
+  {
+    "idx": 11864,
+    "generated": "a chest xray with a small, white chest",
+    "reference": "Low lung volumes. Patchy opacities in the lung bases, more pronounced within retrocardiac region, may reflect atelectasis however aspiration or infection cannot be excluded in the correct clinical setting."
+  },
+  {
+    "idx": 17007,
+    "generated": "a chest xray with a small chest xray",
+    "reference": "CHF. An underlying infectious infiltrate on the left cannot be excluded."
+  },
+  {
+    "idx": 6150,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "Findings most consistent with pulmonary edema."
+  },
+  {
+    "idx": 1777,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "No acute cardiopulmonary process."
+  },
+  {
+    "idx": 13553,
+    "generated": "a chest xray with a radiograph of the chest",
+    "reference": "Left lower lobe collapse and/or consolidation, possibly slightly improved. The possibility of a pneumonic infiltrate in the left lower lobe cannot be excluded. Marked cardiomegaly and mild CHF. Pacemakers and leads probably unchanged - please see comment above. Degree of distention of the esophagus appears less. Apparent smaller caliber of the left mainstem bronchus compared to the right, unchanged."
+  },
+  {
+    "idx": 15153,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "Interval improvement increased interstitial markings. No current evidence of CHF. Persistent left lower lobe collapse and/or consolidation."
+  },
+  {
+    "idx": 17800,
+    "generated": "a chest radiograph showing the chest and chest",
+    "reference": "Bibasilar airspace opacities concerning for infection or aspiration. Mild pulmonary vascular congestion."
+  },
+  {
+    "idx": 28519,
+    "generated": "a chest with a large, open chest and a small chest",
+    "reference": "Slight interval improvement in aeration of the right lung base with continued left basilar atelectasis, and unchanged support devices."
+  },
+  {
+    "idx": 21574,
+    "generated": "a chest xray with a small, white chest",
+    "reference": "Mild to moderate pulmonary edema with small bilateral pleural effusions. Bibasilar airspace opacities could reflect atelectasis but infection is difficult to exclude."
+  },
+  {
+    "idx": 37,
+    "generated": "a chest xray with a small chest xray",
+    "reference": "Appropriately placed NG tube."
+  },
+  {
+    "idx": 27062,
+    "generated": "a chest xray with a large, white chest",
+    "reference": "Bibasilar opacities potentially due to atelectasis in the setting of low lung volumes noting that infection or aspiration are difficult to exclude. RECOMMENDATIONS: Consider repeat exam with PA and lateral with improved inspiratory effort to further clarify."
+  },
+  {
+    "idx": 16881,
+    "generated": "a chest xray with a radiograph showing the chest and chest",
+    "reference": "Persistent bibasilar opacities which may represent atelectasis versus pneumonia in the appropriate clinical setting. Slight interval improvement in bilateral pleural effusions. Mild interstitial edema."
+  },
+  {
+    "idx": 28373,
+    "generated": "a chest radiograph showing the chest and chest",
+    "reference": "Slight decrease in density of the right upper lobe consolidation."
+  },
+  {
+    "idx": 13255,
+    "generated": "a chest xray with a small, white chest",
+    "reference": "Moderate retrocardiac and left basilar atelectasis with a possible small left pleural effusion. No overt pulmonary edema or pneumonia."
+  },
+  {
+    "idx": 25343,
+    "generated": "a chest xray with a radiograph of the chest",
+    "reference": "Increased bibasilar opacities with small pleural effusions, in the appropriate clinical setting could represent aspiration, alternatively confluent atelectasis."
+  },
+  {
+    "idx": 3802,
+    "generated": "a black and white photo of a chest with a large, open lung",
+    "reference": "No evidence of pulmonary edema. Opacity in the left lung base, likely reflecting atelectasis but cannot completely exclude aspiration or pneumonia in the proper clinical setting."
+  },
+  {
+    "idx": 10603,
+    "generated": "a chest xray with a large, white chest",
+    "reference": "Low lung volumes with left basilar atelectasis and right basilar opacity concerning for pneumonia or aspiration. High riding right humeral head and top normal acromio-clavicular interval, which may reflect prior injury. Clinical correlation is recommended."
+  },
+  {
+    "idx": 8276,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "No significant interval change."
+  },
+  {
+    "idx": 10315,
+    "generated": "a chest xray with a large rib fracture",
+    "reference": "The PICC line appears to be in satisfactory position. A density now projects over the cardiac silhouette which could represent atelectasis or early consolidation."
+  },
+  {
+    "idx": 2889,
+    "generated": "a chest with a small chest and a small chest",
+    "reference": "Stable left lung base atelectasis and pleural effusion. Lines are unchanged."
+  },
+  {
+    "idx": 14917,
+    "generated": "a chest xray with a large rib fracture",
+    "reference": "Bilateral lower lobe hazy opacities, compatible with pneumonia or aspiration."
+  },
+  {
+    "idx": 1203,
+    "generated": "a chest xray with a small, white, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy,",
+    "reference": "Mild pulmonary edema."
+  },
+  {
+    "idx": 18046,
+    "generated": "a chest xray with a small chest xray",
+    "reference": "Mild interstitial pulmonary edema. Apparent moderate cardiomegaly, unchanged from but new from , likely exaggarated by low lung volumes and techniqe but dilated cardiomyopathy or pericardial effusion should be considered."
+  },
+  {
+    "idx": 24948,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "Left pleural drainage catheter is only partially imaged and likely needs to advanced. No significant interval change, severe cardiomegaly with basal opacities likely atelectasis. Left apical pneumothorax is small and slightly larger. with Dr."
+  },
+  {
+    "idx": 26688,
+    "generated": "a chest xray with a radiograph of the chest",
+    "reference": "Bibasilar atelectasis without definite acute cardiopulmonary process."
+  },
+  {
+    "idx": 13133,
+    "generated": "a chest with a small chest and a small chest",
+    "reference": "New bibasilar opacities, worse on the right than the left, are concerning for pneumonia."
+  },
+  {
+    "idx": 21735,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "Increased right lung base opacity, which could reflect a combination of atelectasis and pleural fluid, however an early infectious process cannot be excluded and short-term followup is recommended. Stable small left-sided pleural effusion with atelectasis of the left lung base."
+  },
+  {
+    "idx": 9452,
+    "generated": "a chest with a small chest and a small chest",
+    "reference": "Left internal jugular central venous catheter tip in the upper SVC. No pneumothorax. Slight interval withdrawal is suggested. Standard positioning of enteric tube. Mild bibasilar atelectasis."
+  },
+  {
+    "idx": 16252,
+    "generated": "a chest with a large, white, lumpy, lumpy, lumpy, lumpy, lump",
+    "reference": "No significant change from the prior study."
+  },
+  {
+    "idx": 22755,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "Opacification of the left apex as well as the left lower lobe and along the left lateral pleural surface concerning for pleural based disease, neoplasm not excluded. Findings alternatively, and less likely reflect loculated pleural fluid. Please refer to same day Chest CT for further characterization."
+  },
+  {
+    "idx": 13500,
+    "generated": "a chest with a small chest and a small chest",
+    "reference": "No change."
+  },
+  {
+    "idx": 10817,
+    "generated": "a chest with a large, white lung",
+    "reference": "Status post extubation. Persistent mediastinal and hilar contour abnormality should be assessed with chest CTA when clinically appropriate. Findings discussed with Dr phone at approximately 10am on ."
+  },
+  {
+    "idx": 5273,
+    "generated": "a chest xray with a radiograph of the chest",
+    "reference": "Mild increase in right lower lobe opacity from lung re-expansion and atelectasis. No pneumothorax."
+  },
+  {
+    "idx": 28138,
+    "generated": "a chest xray with a small chest",
+    "reference": "Appropriate position of support devices. Multifocal opacities predominantly in the left mid lung zone could represent multifocal infection or malignant involvement. Further evaluation with dedicated CT of the chest is recommended."
+  },
+  {
+    "idx": 3431,
+    "generated": "a chest xray with a small amount of oxygen in the chest",
+    "reference": "No acute intrathoracic process."
+  },
+  {
+    "idx": 21983,
+    "generated": "a chest xray with a large, open lung",
+    "reference": "Doubt significant interval change."
+  },
+  {
+    "idx": 10530,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "No pneumothorax. Right pleural effusion is smaller. Right lung base opacity is likely atelectasis or re-expansion edema."
+  },
+  {
+    "idx": 10931,
+    "generated": "a chest xray with a small, white, chest xray",
+    "reference": "No acute cardiopulmonary process."
+  },
+  {
+    "idx": 13392,
+    "generated": "a chest with a large, open chest",
+    "reference": "Unchanged radiograph without acute cardiopulmonary process."
+  },
+  {
+    "idx": 11411,
+    "generated": "a chest xray with a small chest",
+    "reference": "Pulmonary venous congestion with cardiomegaly. No pneumonia. Radiology should be consulted before the patient leaves the department to see if oblique views would be helpful. ."
+  },
+  {
+    "idx": 15416,
+    "generated": "the chest is shown with a small, open chest",
+    "reference": "No pneumothorax status post thoracentesis."
+  },
+  {
+    "idx": 2993,
+    "generated": "a chest with a small chest and a small chest",
+    "reference": "Compared to the prior study the appearance of the lungs is much worse, in particular with left greater than right lower lobe infiltrate"
+  },
+  {
+    "idx": 16129,
+    "generated": "a chest xray with a large rib fracture",
+    "reference": "No acute abnormalities."
+  },
+  {
+    "idx": 26711,
+    "generated": "a radiograph of the chest showing the chest and chest",
+    "reference": "The Dobbhoff tube terminates in the left lower lobe bronchus. Otherwise stable chest radiograph. by , M. D."
+  },
+  {
+    "idx": 20823,
+    "generated": "a chest xray with a small fracture",
+    "reference": "Worsened appearance to the lungs compared to . While some of this may be due to pulmonary edema, an underlying infectious infiltrate particularly on the left cannot be exclude"
+  },
+  {
+    "idx": 14297,
+    "generated": "a chest xray with a small, white, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy,",
+    "reference": "Gradually improving pulmonary edema or viral pneumonia in the right lung. No new consolidation. Pronounced leftward shift of the right lung and mediastinum post pneumonectomy, which can be seen in the setting of right mainstem bronchus compromise (post-pneumonectomy syndrome)."
+  },
+  {
+    "idx": 19202,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "Persistent small left pleural effusion and atelectasis at the base left lung. Small bilateral apical pneumothoraces."
+  },
+  {
+    "idx": 5951,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "No significant change in extent of small-to-moderate right apical pneumothorax from ."
+  },
+  {
+    "idx": 9122,
+    "generated": "a chest with a large lump in the middle",
+    "reference": "Low lung volumes with bibasilar opacities, most likely atelectasis though aspiration should be considered. Mild vascular congestion."
+  },
+  {
+    "idx": 14504,
+    "generated": "a chest xray with a small, open chest",
+    "reference": "No pneumothorax. Right hilar opacity is most consistent with atelectasis."
+  },
+  {
+    "idx": 21371,
+    "generated": "a chest with a large, open chest and a small chest with a small chest",
+    "reference": "New right basilar opacity concerning for pneumonia. Probable small bilateral pleural effusions and left basilar atelectasis."
+  },
+  {
+    "idx": 17024,
+    "generated": "a chest xray with a radiograph of the chest",
+    "reference": "Worsened fluid overload"
+  },
+  {
+    "idx": 15432,
+    "generated": "a chest with a large, open chest and a small chest with a small chest",
+    "reference": "Endotracheal tube in appropriate position."
+  },
+  {
+    "idx": 5744,
+    "generated": "a chest xray with a large, white, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy,",
+    "reference": "Bilateral lower lobe pneumonias. Telephone notification to Dr. by Dr. m."
+  },
+  {
+    "idx": 24809,
+    "generated": "a chest xray with a radiograph of the chest",
+    "reference": "Bilateral chest tubes pulled back slightly, however the left chest tube still is medially located"
+  },
+  {
+    "idx": 25033,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "Mild bibasilar atelectasis."
+  },
+  {
+    "idx": 1319,
+    "generated": "a chest with a small chest and a small chest",
+    "reference": "Dobbhoff tube with the tip in the stomach. Otherwise no change."
+  },
+  {
+    "idx": 18904,
+    "generated": "a chest xray with a small white piece of paper in the middle of the chest",
+    "reference": "Bullet fragment over the left hemithorax with comminuted humeral fracture incompletely assessed."
+  },
+  {
+    "idx": 8839,
+    "generated": "a chest xray with a radiograph showing the chest and chest",
+    "reference": "Moderate right pleural effusion, moderate cardiomegaly, and mild vascular congestion are unchanged."
+  },
+  {
+    "idx": 26946,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "Endotracheal tube positioned appropriately. NG tube appears also to be positioned appropriately, though the tip is excluded from view. Diffuse pulmonary edema with pleural effusions again seen."
+  },
+  {
+    "idx": 22054,
+    "generated": "a chest xray with a small, open chest",
+    "reference": "Low lung volumes."
+  },
+  {
+    "idx": 25087,
+    "generated": "a chest radiograph showing the chest and chest",
+    "reference": "Indistinct right heart border, concerning for right middle lobe pneumonia. Low lung volumes without appreciable pulmonary edema. Left lower lung atelectasis. D. by , M. D."
+  },
+  {
+    "idx": 679,
+    "generated": "a chest xray with a small, white, cross section",
+    "reference": "Pulmonary vascular congestion with minimal reticular edema."
+  },
+  {
+    "idx": 19260,
+    "generated": "a chest with a large, open chest",
+    "reference": "Interval increase in left pleural effusion with associated increased left base atelectasis. Improved vascular congestion bilaterally."
+  },
+  {
+    "idx": 18870,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "Mild cardiomegaly without pulmonary edema."
+  },
+  {
+    "idx": 28229,
+    "generated": "a chest with a large, white chest",
+    "reference": "Right IJ central venous catheter terminates in the mid SVC. No pneumothorax. Pulmonary edema with bilateral small pleural effusion. Opacities at the lung bases likely reflect atelectasis, however an underlying pneumonia cannot be excluded."
+  },
+  {
+    "idx": 27424,
+    "generated": "a chest xray with a large, white, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy,",
+    "reference": "Unchanged positioning of all other lines and tubes without evidence of pneumothorax. Unchanged bilateral airspace opacities. Displaced right clavicular fracture. D. by , M. D."
+  },
+  {
+    "idx": 22120,
+    "generated": "a chest xray with a radiograph of the chest",
+    "reference": "Bilateral diffuse interstitial opacities, most consistent with moderate to severe pulmonary edema. Small right pleural effusion."
+  },
+  {
+    "idx": 30330,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "Right IJ central line terminates in the mid to low SVC. Moderate pulmonary edema with bilateral pleural effusions."
+  },
+  {
+    "idx": 2996,
+    "generated": "a chest xray with a large rib fracture",
+    "reference": "No acute cardiopulmonary process."
+  },
+  {
+    "idx": 848,
+    "generated": "a chest xray with a cross section showing the chest and chest",
+    "reference": "Calcified pleural plaques, usually associated with prior asbestos exposure. No evidence of acute cardiopulmonary disease."
+  },
+  {
+    "idx": 8210,
+    "generated": "a chest with a small chest and a small chest",
+    "reference": "Low lung volumes without definite acute cardiopulmonary process."
+  },
+  {
+    "idx": 30575,
+    "generated": "a chest with a large, open chest",
+    "reference": "New dense consolidation in the left lower lobe with associated moderate effusion can be pneumonia."
+  },
+  {
+    "idx": 29568,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "No acute cardiopulmonary process."
+  },
+  {
+    "idx": 24096,
+    "generated": "a chest xray with a small, white, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy,",
+    "reference": "Right basilar atelectasis and/or small effusion."
+  },
+  {
+    "idx": 14170,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "Malpositioned right PICC coursing upwards within the right internal jugular vein. D. This dictation was locked in the Fluency voice recognition system resulting in delay in approval."
+  },
+  {
+    "idx": 29177,
+    "generated": "a chest xray with a small, white chest",
+    "reference": "No pneumothorax following chest tube removal."
+  },
+  {
+    "idx": 1307,
+    "generated": "a chest xray with a radiograph of the chest",
+    "reference": "No acute cardiopulmonary process."
+  },
+  {
+    "idx": 19619,
+    "generated": "a chest xray with a large, white chest",
+    "reference": "Stable small right apical pneumothorax without evidence of tension. Stable bibasilar atelectasis and small left pleural effusion. No evidence of pneumonia."
+  },
+  {
+    "idx": 2638,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "Low lung volumes. Left basilar opacity silhouetting the hemidiaphragm, potentially due to atelectasis; however, repeat exam with PA and lateral can be performed if the patient is amenable."
+  },
+  {
+    "idx": 14358,
+    "generated": "a chest xray with a large rib fracture",
+    "reference": "Right Port-A-Cath in appropriate positioning. Moderate interstitial pulmonary edema, increased since ."
+  },
+  {
+    "idx": 16197,
+    "generated": "a chest xray with a radiograph showing the chest and chest",
+    "reference": "No decrease in massive cardiomegaly or pulmonary artery dilatation . Echocardiography is recommended to further evaluate this finding. These findings were reported to physician assistant, Ms. m. via phone by ."
+  },
+  {
+    "idx": 17715,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "No significant change from"
+  },
+  {
+    "idx": 16418,
+    "generated": "a chest xray with a radiograph of the chest",
+    "reference": "Mild pulmonary vascular congestion in the setting of moderate cardiomegaly. No focal opacities to suggest pneumonia."
+  },
+  {
+    "idx": 8928,
+    "generated": "a chest xray with a radiograph of the chest",
+    "reference": "Right-sided central venous catheter tip in the right atrium."
+  },
+  {
+    "idx": 13200,
+    "generated": "a chest xray with a radiograph of the chest",
+    "reference": "Patchy and ill-defined perihilar nodular opacities, more pronounced on the left, worrisome for multifocal pneumonia."
+  },
+  {
+    "idx": 22953,
+    "generated": "a chest xray with a large rib fracture",
+    "reference": "No definite traumatic findings. Rib series may be helpful if there is focality. Mild bibasilar atelectasis. Mild elevation of the left hemidiaphragm of unclear significance."
+  },
+  {
+    "idx": 9972,
+    "generated": "a chest xray with a radiograph of the chest",
+    "reference": "No evidence of acute disease."
+  },
+  {
+    "idx": 22591,
+    "generated": "a chest xray with a small, white, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy,",
+    "reference": "No acute intrathoracic process."
+  },
+  {
+    "idx": 15373,
+    "generated": "a chest with a radiograph showing the chest and chest",
+    "reference": "No significant change to the appearance of the lungs."
+  },
+  {
+    "idx": 4078,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "Persistent consolidation in the left upper lobe, unchanged small pleural effusion. No definite pneumothorax seen."
+  },
+  {
+    "idx": 14404,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "No evidence of intrathoracic trauma. Note, conventional radiography is not the best study to evaluate for chest cage injury. If there are focal findings, detailed views of those areas should be obtained with consideration for CT if clinically indicated."
+  },
+  {
+    "idx": 9465,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "No evidence of pneumonia or pleural effusions. No significant changes compared to prior study."
+  },
+  {
+    "idx": 18672,
+    "generated": "a chest with a large, open chest",
+    "reference": "No evidence of pneumonia."
+  },
+  {
+    "idx": 27039,
+    "generated": "a chest xray with a radiograph showing the chest and chest",
+    "reference": "New right subclavian line with tip in the lower SVC. No pneumothorax."
+  },
+  {
+    "idx": 24569,
+    "generated": "a chest with a large, open chest",
+    "reference": "Persistent right-sided post-operative pleural densities are stable."
+  },
+  {
+    "idx": 30202,
+    "generated": "a chest xray with a large, white chest",
+    "reference": "No radiographic evidence of pneumonia."
+  },
+  {
+    "idx": 10088,
+    "generated": "a chest xray with a small, open chest",
+    "reference": "No acute cardiopulmonary process."
+  },
+  {
+    "idx": 26001,
+    "generated": "a chest radiograph showing the chest and chest",
+    "reference": "No subpulmonic pneumothorax. Stable small right pleural effusion with stable pleural and parenchymal opacities most consistent with postsurgical changes."
+  },
+  {
+    "idx": 5440,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "No evidence of pneumonia."
+  },
+  {
+    "idx": 1956,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "Increased regions of opacity in the right lung may be overlying soft tissue or early infiltrate. Recommend clinical correlation and follow-up chest x-ray"
+  },
+  {
+    "idx": 30527,
+    "generated": "a chest xray with a small, white, lumpy lump on the chest",
+    "reference": "Right internal jugular central venous catheter terminates in the low SVC without evidence of pneumothorax. Right greater than left perihilar opacities may be due to infection vs asymmetric pulmonary edema, other alveolar process not excluded."
+  },
+  {
+    "idx": 4664,
+    "generated": "a chest with a radiograph showing the chest and chest",
+    "reference": "Small left apical pneumothorax, similar in degree when compared the prior study. Persistent left pleural effusion. Mild congestive heart failure."
+  },
+  {
+    "idx": 27118,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "Small left base opacity, consistent with atelectasis or infection. Round left upper lobe lesion concerning for pulmonary mass. Nonemergent chest CT is recommended for further evaluation."
+  },
+  {
+    "idx": 8712,
+    "generated": "a chest xray with a radiograph of the chest",
+    "reference": "Right chest wall port catheter tip ends in the mid SVC. No evidence of acute cardiopulmonary process."
+  },
+  {
+    "idx": 4886,
+    "generated": "a chest radiograph showing the chest and chest",
+    "reference": "Lung opacities, in the setting of hemoptysis are most compatible with pulmonary hemorrhage."
+  },
+  {
+    "idx": 21244,
+    "generated": "a chest xray with a radiograph of the chest",
+    "reference": "New opacity in the right mid and lower lung zones, which given the asymmetry is concerning for pneumonia or aspiration. In the setting of mild pulmonary edema, asymmetric edema is also a consideration. Unchanged small right pleural effusion. Slight decrease in size of a trace left pleural effusion. Stable mild cardiomegaly. Again seen overriding displaced partially imaged right humerus fracture. Results were discussed with Dr. m. on via telephone by Dr. at the time the findings were discovered."
+  },
+  {
+    "idx": 7371,
+    "generated": "a chest xray with a large, white chest",
+    "reference": "Cordis catheter sheath ends at the junction of the brachiocephalic vein and the SVC. Worsening edema, superimposed pneumonia cannot be excluded."
+  },
+  {
+    "idx": 17865,
+    "generated": "a chest xray with a radiograph of the chest",
+    "reference": "Cardiomegaly without signs of pneumonia or edema peer"
+  },
+  {
+    "idx": 3764,
+    "generated": "a chest xray with a small chest",
+    "reference": "NG tube in the stomach."
+  },
+  {
+    "idx": 13944,
+    "generated": "a chest radiograph showing the chest and chest",
+    "reference": "No acute cardiopulmonary process."
+  },
+  {
+    "idx": 6486,
+    "generated": "a chest xray with a small chest xray",
+    "reference": "Cardiomegaly and pulmonary vascular congestion with mild pulmonary edema."
+  },
+  {
+    "idx": 26372,
+    "generated": "a chest xray with a large, white chest",
+    "reference": "Interval removal of both PICC lines. Extensive pulmonary opacity persists though etiology unclear. Please correlate clinically."
+  },
+  {
+    "idx": 21689,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "Left basilar opacity suggestive of an effusion with underlying atelectasis. Infection also possible. Diffuse sclerotic metastases."
+  },
+  {
+    "idx": 19348,
+    "generated": "a chest xray with a large, white chest",
+    "reference": "Interval removal of multiple support lines and devices. No pneumothorax."
+  },
+  {
+    "idx": 20504,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "No acute cardiac or pulmonary process."
+  },
+  {
+    "idx": 25956,
+    "generated": "a black and white photo of a chest with smoke coming out",
+    "reference": "Nasogastric tube can be followed to the lower esophagus; however, the tip is not clearly visualized. Moderate pulmonary edema."
+  },
+  {
+    "idx": 25844,
+    "generated": "a chest xray with a small, open chest",
+    "reference": "Appropriately positioned PICC line with tip in the expected location of the low SVC."
+  },
+  {
+    "idx": 8676,
+    "generated": "a chest xray with a small, white, cross section",
+    "reference": "No acute intrathoracic process."
+  },
+  {
+    "idx": 7653,
+    "generated": "a chest xray with a small bone bone",
+    "reference": "No acute cardiopulmonary abnormality."
+  },
+  {
+    "idx": 22549,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "ET tube and enteric tube appropriate in position. Right IJ central venous catheter has tip in the upper atrium. Mild pulmonary edema, likely related to resuscitation. Wide left upper mediastinum, possibly due to hematoma or aortic dissection should be considered in clinical context before any additional imaging. Findings reported to Dr. by phone at 10am on ."
+  },
+  {
+    "idx": 2335,
+    "generated": "a radiograph of the chest shows the chest and chest",
+    "reference": "Standard positioning of support lines and tubes. Low lung volumes with patchy bibasilar opacities, likely atelectasis. Early infection or aspiration is not completely excluded."
+  },
+  {
+    "idx": 14891,
+    "generated": "a chest with a large, open lung",
+    "reference": "No acute cardiopulmonary process. Although no acute fracture or other chest wall lesion is seen, conventional chest radiographs are not sufficient for detection or characterization of most such abnormalities. If the demonstration of trauma to the chest wall is clinically warranted, the location of any referrable focal findings should be clearly marked and imaged with either bone detail radiographs or Chest CT scanning."
+  },
+  {
+    "idx": 28199,
+    "generated": "a chest with a small chest and a small chest",
+    "reference": "Enteric tube in appropriate position."
+  },
+  {
+    "idx": 23060,
+    "generated": "a chest xray with a small chest xray",
+    "reference": "Low lung volumes. Subsegmental atelectasis. Focal opacity at the right lung base likely representing pleural fluid and volume loss. A small focal area of consolidation at the right base cannot be excluded, however."
+  },
+  {
+    "idx": 9272,
+    "generated": "a chest with a small, white substance on the chest",
+    "reference": "Resolution of borderline pulmonary edema. Slight interval increase in bibasilar atelectasis. Satisfactory position of multiple support tubes and lines."
+  },
+  {
+    "idx": 23190,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "COPD. No acute cardiopulmonary process seen."
+  },
+  {
+    "idx": 9448,
+    "generated": "a chest with a large, open lung",
+    "reference": "Stable appearance of the chest. Low ET tube as previously."
+  },
+  {
+    "idx": 7590,
+    "generated": "a chest xray with a small, open chest",
+    "reference": "Small to moderate pleural effusions with pulmonary vascular congestion."
+  },
+  {
+    "idx": 1070,
+    "generated": "a chest with a small lump on the left side",
+    "reference": "Stable appearance of large right-sided layering pleural effusion. No significant interval changes."
+  },
+  {
+    "idx": 9551,
+    "generated": "a chest xray with a radiograph of the chest",
+    "reference": "Unremarkable post-operative findings. Somewhat limited film."
+  },
+  {
+    "idx": 15413,
+    "generated": "a chest xray with a small, white bone bone",
+    "reference": "Bilateral pleural effusions, right greater than left, with overlying atelectasis. Findings better assessed on subsequent CT."
+  },
+  {
+    "idx": 19480,
+    "generated": "a black and white image of a chest",
+    "reference": "Low lung volumes. No pneumonia or CHF."
+  },
+  {
+    "idx": 22614,
+    "generated": "a chest xray with a radiograph of the chest",
+    "reference": "No acute cardiopulmonary process."
+  },
+  {
+    "idx": 29403,
+    "generated": "a chest xray with a small chest",
+    "reference": "No acute cardiopulmonary abnormality."
+  },
+  {
+    "idx": 13398,
+    "generated": "a chest xray with a small, white, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy,",
+    "reference": "Diffuse airspace and interstitial opacities which worsened from to , but improved from to present; the differential diagnosis includes pulmonary hemorrhage, pulmonary edema, and interstitial fibrosis; correlate with the treatment that brought on the improvement in appearance. FINAL REPORT HISTORY: -year-old female with worsening interstitial lung disease and worsening dyspnea. STUDY: Portable AP upright chest radiograph. FINDINGS: The cardiomediastinal contours are stable and within normal limits. The lungs continue to demonstrate diffuse airspace and intersitial opacities, which show a worsening trend from to , but then show improvement from to present. Blunting of the costophrenic angles as well as subtle obscuring of the hemidiaphragms suggests some degree of bibasilar atelectasis and small bilateral pleural effusions. There is no pneumothorax. IMPRESSION: Diffuse airspace and interstitial opacities which worsened from to , but improved from to present; the differential diagnosis includes pulmonary hemorrhage, pulmonary edema, and interstitial fibrosis; correlate with the treatment that brought on the improvement in appearance."
+  },
+  {
+    "idx": 87,
+    "generated": "a chest xray with a large rib fracture",
+    "reference": "Enteric tube in standard position. Low lung volumes with patchy right mid and lower lung field opacities, possibly due to aspiration and/or atelectasis."
+  },
+  {
+    "idx": 5133,
+    "generated": "a chest with a small, open chest",
+    "reference": "Dobbhoff tube has been advanced and is now located in the expected region of the gastric body. PICC in unchanged position. Stable right pleural effusion. Slight increase in bibasilar atelectasis. Trace left pleural effusion unchanged."
+  },
+  {
+    "idx": 2462,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "Patchy opacity in the left lower lobe, which could represent subsegmental atelectasis versus subtle early infection in the appropriate clinical setting."
+  },
+  {
+    "idx": 18108,
+    "generated": "a chest xray with a small, white chest",
+    "reference": "No pleural effusion seen. Unchanged cardiomegaly."
+  },
+  {
+    "idx": 5699,
+    "generated": "a chest xray with the chest xrays and the chest xrays are visible",
+    "reference": "Otherwise, unremarkable examination of the chest."
+  },
+  {
+    "idx": 7864,
+    "generated": "a chest xray with a small, white chest",
+    "reference": "No acute cardiopulmonary process."
+  },
+  {
+    "idx": 5150,
+    "generated": "a chest xray with a small, white, bone bone",
+    "reference": "Known left hilar lesion seen on prior CT is not well visualized on the current radiograph. Continued postobstructive atelectatic changes in the left lung base, not substantially changed in the interval."
+  },
+  {
+    "idx": 2663,
+    "generated": "a chest xray with a large, white chest",
+    "reference": "No significant interval change since the prior study. No discernible pneumothorax identified."
+  },
+  {
+    "idx": 21664,
+    "generated": "a chest with a radiograph showing the chest and chest",
+    "reference": "No notable change. Moderate bilateral pleural effusions, mild pulmonary edema and left lower lobe collapse are similar to prior."
+  },
+  {
+    "idx": 8679,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "New parenchymal opacities in the right upper lobe likely reflect hematoma or hemorrhage after biopsy. Any pneumothorax, if present, is too small to be seen. P. by , M. D."
+  },
+  {
+    "idx": 6918,
+    "generated": "a chest with a large, white chest with a small chest with a small chest with a small chest with",
+    "reference": "Improvement in pulmonary edema. No additional finding incomplete imaging of the left lung"
+  },
+  {
+    "idx": 20519,
+    "generated": "a chest xray with a radiograph of the chest",
+    "reference": "No pneumothorax. Unchanged right upper lobe mass containing a radiopaque fiducial marker."
+  },
+  {
+    "idx": 6812,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "Little change from . Findings discussed with Dr."
+  },
+  {
+    "idx": 25021,
+    "generated": "a chest xray with a large, open chest",
+    "reference": "No acute findings. Please refer to subsequent CT chest for further details regarding lung nodules."
+  },
+  {
+    "idx": 3255,
+    "generated": "a chest xray with a radiograph of the chest",
+    "reference": "No significant interval change since yesterday's exam. Linear opacity projecting over the right upper extremity, potentially a PICC or external structure to be correlated clinically."
+  },
+  {
+    "idx": 24279,
+    "generated": "a chest xray with a radiograph of the chest",
+    "reference": "Correct positioning of the Dobbhoff tube Improvement of the bibasilar atelectasis."
+  },
+  {
+    "idx": 19999,
+    "generated": "a chest with a radiograph showing the chest and chest",
+    "reference": "Cardiomegaly with mild pulmonary edema. Bibasilar opacities which may be due to atelectasis though on the right, infection would be difficult to exclude. Enteric tube side port in the region of the GE junction and should be slightly advanced for optimal positioning. , MD"
+  },
+  {
+    "idx": 1975,
+    "generated": "a chest xray with a small, white, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy, lumpy,",
+    "reference": "No significant change post left chest tube removal. No pneumothorax"
+  },
+  {
+    "idx": 20372,
+    "generated": "a chest with a small, white substance on the chest",
+    "reference": "Increased bilateral airspace opacities may be due to worsening pulmonary edema, or new aspiration/infection. Increased gaseous distention of the stomach may increase the risk of aspiration. Stable small left pleural effusions with bibasilar subsegmental atelectasis."
+  },
+  {
+    "idx": 18653,
+    "generated": "a chest with a small chest and a small chest",
+    "reference": "No convincing evidence of pneumonia on this exam limited by low lung volumes."
+  },
+  {
+    "idx": 10015,
+    "generated": "the chest is shown with a small, white, chest",
+    "reference": "Left subclavian CVC terminates at SVC RA junction. Low lung volumes."
+  },
+  {
+    "idx": 14065,
+    "generated": "a chest xray with a radiograph of the chest",
+    "reference": "No acute cardiopulmonary process."
+  },
+  {
+    "idx": 19306,
+    "generated": "a chest xray with a small amount of the chest",
+    "reference": "Cardiomegaly, which appears slightly enlarged as compared to the prior study with mild pulmonary vascular engorgement."
+  },
+  {
+    "idx": 28217,
+    "generated": "a chest xray with a small, white, cross section",
+    "reference": "Mildly increased opacity at the left lung base is likely atelectasis, but could represent aspiration or pneumonia in the appropriate clinical setting."
+  },
+  {
+    "idx": 9751,
+    "generated": "a chest xray with a small chest xray",
+    "reference": "Chest tube in appropriate position with in minimal unchanged left apical pneumothorax. Unchanged moderate left pleural effusion."
+  }
+]
