@@ -1,259 +1,275 @@
 # Estructura del Proyecto — BLIP Fine-tuning e Interpretabilidad Visual
-**I308 Visión Artificial — Otoño 2026**  
-**Autor:** Felipe  
+**I308 Visión Artificial — Otoño 2026**
+**Autor:** Felipe
 **Tema:** Fine-tuning de BLIP sobre radiografías y análisis de cross-attention + Grad-CAM
+
+> **Estado del documento (2026-06-28):** refleja el repo **real**, no el plan original. Los
+> archivos marcados **🧪 transitorio** son de debug/experimentación de sesiones puntuales: no son
+> parte del pipeline final y se pueden borrar sin afectar la reproducibilidad del resultado.
+> Los marcados **📦 desactualizado** describen el plan viejo y se conservan solo como referencia.
 
 ---
 
 ## Dataset utilizado
 
-**`itsanmolgupta/mimic-cxr-dataset`** en Hugging Face  
+**`itsanmolgupta/mimic-cxr-dataset`** en Hugging Face
 - 30.600 imágenes de tórax (512×512 px) con campos `image`, `findings` e `impression`
 - Formato Parquet, ~800 MB, split único: `train`
 - Sin necesidad de registro en PhysioNet
-- Descarga con un comando:
 
 ```python
 from datasets import load_dataset
 ds = load_dataset("itsanmolgupta/mimic-cxr-dataset")
 ```
 
-Para el fine-tuning se usa `impression` como target (es corta y coincide con el estilo de caption de BLIP).
-`findings` es demasiado larga y detallada para ser un target de generación útil.
-`impression` también se usa como referencia para evaluación con BLEU/CIDEr/METEOR.
+Se usa `impression` como target del fine-tuning (corta, estilo caption) y como referencia para
+métricas. `findings` es demasiado larga para target. Ver nota al final.
 
 ---
 
-## Árbol de directorios
+## Árbol real del repositorio (lo versionado)
 
 ```
-blip-interpretabilidad/
+image-captioning/
 │
+├── CLAUDE.md                       ← Contexto del proyecto para Claude Code (leer primero)
+├── PLAN.md                         ← 📦 desactualizado: plan original de notebooks 00–05
+├── estructura.md                   ← Este archivo
+├── HOJA_DE_RUTA.md                 ← Plan vigente: notebook comparativo + análisis del paper
+├── NOTEBOOK_COMPARATIVO.md         ← Diseño detallado del notebook de explicabilidad (07)
+├── soluciones_extra.md             ← Soluciones al mode collapse acotadas al scope
 ├── README.md
+├── requirements.txt
+├── prueba.ipynb                    ← 🧪 transitorio: scratchpad de pruebas sueltas
 │
-├── data/
-│   ├── hf_cache/                      ← Cache local de HuggingFace (Parquet descargado)
-│   │   └── .gitkeep                   ← No se sube al repo (demasiado pesado)
-│   │
+├── data/                           ← (versionado salvo hf_cache/) — índices y assets livianos
 │   ├── splits/
-│   │   ├── train_indices.json         ← Índices del split de entrenamiento (10.000 muestras)
-│   │   ├── val_indices.json           ← Índices del split de validación (1.000 muestras)
-│   │   └── test_indices.json          ← Índices del split de test (1.000 muestras)
-│   │
-│   ├── selected_indices.json          ← Índices de las 20–30 radiografías fijas para análisis
-│   │
-│   └── coco/
-│       ├── raw/                       ← Imágenes descargadas de MS-COCO
-│       └── selected/                  ← 20–30 imágenes seleccionadas para calibración (Parte 1)
+│   │   ├── train_indices.json          ← ~10k índices de entrenamiento
+│   │   ├── val_indices.json            ← índices de validación
+│   │   ├── test_indices.json           ← índices de test
+│   │   ├── test_sub_indices.json       ← subconjunto de test (600 imgs) para evaluaciones rápidas
+│   │   ├── train_sub_indices.json      ← 🧪 subconjunto de smoke test
+│   │   ├── val_sub_indices.json        ← 🧪 subconjunto de smoke test
+│   │   └── _selected_unused.json       ← 🧪 descarte de una regeneración de splits
+│   ├── selected_indices.json           ← 30 radiografías fijas (set A, usado por S1/captions)
+│   ├── visual_test_indices.json        ← 25 radiografías fijas (set B, usado por los HEATMAPS)
+│   ├── img_prueba/                     ← 🧪 imágenes sueltas de prueba (perro.jpg, prueba1.jpeg)
+│   └── hf_cache/                       ← cache de HuggingFace (gitignoreado)
 │
-├── models/
-│   ├── blip_base/                     ← Pesos BLIP preentrenado (Salesforce/blip-image-captioning-base)
-│   │   └── .gitkeep                   ← No se sube al repo
-│   │
-│   └── blip_finetuned/
-│       ├── epoch_1/
-│       ├── epoch_2/
-│       ├── epoch_3/
-│       └── best/                      ← Checkpoint con mejor loss de validación
-│
-├── src/
+├── src/                            ← Lógica reutilizable (los notebooks llaman, no implementan)
 │   ├── data/
-│   │   ├── dataset.py                 ← Clase MimicCXRDataset que envuelve el HF dataset
-│   │   ├── dataloader.py              ← DataLoaders de train/val/test usando los índices en splits/
-│   │   ├── preprocessing.py           ← Transforms de imagen y tokenización de findings/impression
-│   │   └── split_generator.py         ← Script para generar y guardar los splits (una sola vez)
+│   │   ├── utils.py                    ← load_mimic_dataset y helpers de I/O
+│   │   ├── dataset.py                  ← MimicCXRDataset (envuelve el HF dataset)
+│   │   ├── dataloader.py               ← DataLoaders train/val/test desde los índices
+│   │   └── split_generator.py          ← Genera los splits JSON (una sola vez, seed fija)
 │   │
 │   ├── models/
-│   │   ├── blip_loader.py             ← Carga BlipForConditionalGeneration desde HuggingFace
-│   │   └── finetuner.py               ← Loop de entrenamiento, AdamW lr=1e-5, checkpoints
+│   │   ├── blip_loader.py              ← Carga BLIP + processor desde disco o HF; sanity check
+│   │   └── finetuner.py               ← Loop de fine-tuning (AdamW, scheduler, checkpoints)
 │   │
 │   ├── interpretability/
-│   │   ├── cross_att_logits.py        ← Pipeline principal: logits Q·K pre-softmax por palabra (⚠️ pendiente validación profesor)
-│   │   ├── cross_attention.py         ← Pesos post-softmax via forward hooks (referencia; limitación: mapas uniformes sobre 576 tokens)
-│   │   ├── encoder_attention.py       ← Auto-atención CLS→patches del encoder ViT (saliencia global, no word-specific)
-│   │   └── gradcam.py                 ← Grad-CAM para ViT usando pytorch-grad-cam + vit_reshape_transform
+│   │   ├── cross_att_logits.py        ← PRINCIPAL: logits Q·K pre-softmax por palabra (⚠️ ver nota)
+│   │   ├── cross_attention.py         ← Pesos post-softmax (referencia; mapas planos s/576 tokens)
+│   │   └── gradcam.py                 ← Grad-CAM para ViT (reshape transform 24×24 custom)
 │   │
-│   ├── visualization/
-│   │   ├── heatmap.py                 ← Superposición de heatmap sobre imagen
-│   │   └── comparison_grid.py         ← Figura central 3×3 (la "figura de nueve celdas")
-│   │
-│   └── metrics/
-│       ├── nlg_metrics.py             ← BLEU-4, CIDEr, METEOR
-│       └── spatial_metrics.py         ← Correlación espacial cross-attention vs Grad-CAM
+│   └── visualization/
+│       ├── heatmap.py                 ← overlay_heatmap, grillas por palabra, comparación
+│       └── plots.py                   ← Plots auxiliares (curvas, distribuciones)
 │
-├── notebooks/
-│   ├── 00_exploracion_dataset.ipynb   ← Exploración del HF dataset: distribución, ejemplos, campos
-│   ├── 01_calibracion_coco.ipynb      ← Parte 1: validar herramientas en imágenes naturales
-│   ├── 02_baseline_radiografias.ipynb ← Parte 2: BLIP base sobre las radiografías seleccionadas
-│   ├── 03_finetuning.ipynb            ← Fine-tuning de BLIP sobre los 10k pares de MIMIC-CXR
-│   ├── 04_analisis_postft.ipynb       ← Parte 3: análisis post fine-tuning sobre las mismas imágenes
-│   └── 05_resultados_y_metricas.ipynb ← Métricas cuantitativas, tablas y figuras para informe/poster
+├── notebooks/                      ← Ver tabla §"notebooks" — algunos son transitorios
 │
-├── outputs/
-│   ├── parte1_coco/                   ← Figuras de calibración (imágenes naturales)
-│   │   └── {img_id}_{palabra}/
-│   │
-│   ├── parte2_baseline/               ← Heatmaps antes del fine-tuning (radiografías)
-│   │   └── {idx}_{palabra}/
-│   │
-│   ├── parte3_finetuned/              ← Heatmaps después del fine-tuning (mismas radiografías)
-│   │   └── {idx}_{palabra}/
-│   │
-│   ├── figura_central/
-│   │   └── grid_9celdas.png           ← La figura 3×3 que resume el trabajo completo
-│   │
-│   └── metricas/
-│       ├── nlg_antes_despues.csv      ← BLEU-4, CIDEr, METEOR antes y después
-│       └── correlacion_espacial.csv   ← Correlación cross-attention vs Grad-CAM antes y después
+├── docs/                           ← Documentación técnica de apoyo (ver tabla)
 │
-├── informe/
-│   ├── informe.pdf
-│   └── informe.tex                    ← (Opcional) Fuente LaTeX
+├── archivos_ion/                   ← 🧪 Scripts y notebooks de los experimentos D1–D3/S1 (debug)
 │
-├── poster/
-│   ├── poster.pdf
-│   └── poster_source/
+├── analisis/                       ← Hallazgos consolidados para el paper (01–04)
 │
-├── requirements.txt
-└── .gitignore
+├── models/                         ← (gitignoreado) — ver §"Contenido gitignoreado"
+└── outputs/                        ← (gitignoreado) — ver §"Contenido gitignoreado"
 ```
 
----
-
-## Descripción de cada componente
-
-### `data/`
-
-| Archivo / Carpeta | Descripción |
-|---|---|
-| `hf_cache/` | Directorio donde HuggingFace guarda el Parquet descargado (`~/.cache/huggingface` por defecto, o se redirige aquí con `HF_DATASETS_CACHE`). No se versiona. |
-| `splits/train_indices.json` | Lista de 10.000 índices enteros del split `ds["train"]` reservados para fine-tuning. Se genera una sola vez con `split_generator.py` para garantizar reproducibilidad. |
-| `splits/val_indices.json` | 1.000 índices para validación durante el fine-tuning. |
-| `splits/test_indices.json` | 1.000 índices para evaluación final de métricas NLG. |
-| `selected_indices.json` | Los 20–30 índices de las radiografías que se usan en las Partes 2 y 3. **Son fijos y no cambian.** Permiten la comparación antes/después sobre exactamente las mismas imágenes. |
-| `coco/selected/` | 20–30 imágenes de MS-COCO donde BLIP genera captions correctos y verificables visualmente (p.ej. `"a dog running in a park"`). Se usan solo en la Parte 1. |
+> **Módulos del plan original que NO existen** (los menciona `PLAN.md`/`CLAUDE.md` pero no están
+> en disco): `src/data/preprocessing.py`, `src/interpretability/encoder_attention.py`,
+> `src/visualization/comparison_grid.py`, y todo `src/metrics/` (`nlg_metrics.py`,
+> `spatial_metrics.py`). Estos dos últimos hay que **crearlos** para el notebook comparativo
+> (ver `NOTEBOOK_COMPARATIVO.md`).
 
 ---
+
+## Descripción de componentes
 
 ### `src/data/`
-
 | Archivo | Descripción |
 |---|---|
-| `split_generator.py` | Script que carga `ds["train"]` (30.6k muestras), filtra filas con `findings` vacío o `None`, y genera los tres archivos JSON en `data/splits/` con índices aleatorios pero con semilla fija para reproducibilidad. Se ejecuta **una sola vez**. |
-| `dataset.py` | Clase `MimicCXRDataset(Dataset)` de PyTorch. Recibe el HF dataset y una lista de índices. Para cada ítem devuelve `{"pixel_values": tensor, "input_ids": tensor}` listo para BLIP. El texto de entrenamiento es `findings`; opcionalmente se puede configurar para usar `impression`. |
-| `dataloader.py` | Crea los tres `DataLoader` (train/val/test) usando `MimicCXRDataset` con los índices de `splits/`. Configura `batch_size`, `num_workers`, `pin_memory` y `collate_fn` para manejar textos de longitud variable. |
-| `preprocessing.py` | Transformaciones de imagen: resize a 224×224, normalización con la media/std de BLIP. Tokenización: usa `BlipProcessor` para convertir el texto en `input_ids` con padding y truncado a 512 tokens. |
-
----
+| `utils.py` | `load_mimic_dataset(cache_dir)` y helpers de carga/guardado de índices JSON. |
+| `dataset.py` | `MimicCXRDataset(Dataset)`: recibe el HF dataset + lista de índices, devuelve `pixel_values`/`input_ids` para BLIP. Target = `impression`. |
+| `dataloader.py` | Crea los `DataLoader` train/val/test con `collate_fn` para texto de largo variable. |
+| `split_generator.py` | Genera `data/splits/*.json` con seed fija. Se corre **una sola vez**. |
 
 ### `src/models/`
-
 | Archivo | Descripción |
 |---|---|
-| `blip_loader.py` | Carga `BlipForConditionalGeneration.from_pretrained("Salesforce/blip-image-captioning-base")` y `BlipProcessor`. Incluye una función `sanity_check(image)` que genera un caption sobre una imagen de prueba para verificar que el modelo cargó correctamente antes de cualquier modificación. |
-| `finetuner.py` | Loop de entrenamiento completo: optimizador AdamW con `lr=1e-5`, scheduler lineal con warmup, cálculo del loss de generación por época, guardado de checkpoints en `models/blip_finetuned/epoch_N/`, early stopping si el val loss no mejora en 2 épocas consecutivas. Adapta tanto el encoder visual como el decoder de texto. |
-
----
+| `blip_loader.py` | `load_model_and_processor(model_dir, device)` — carga desde disco o HF. Incluye sanity check. |
+| `finetuner.py` | Loop completo: AdamW `lr=1e-5`, scheduler con warmup, `train_one_epoch`/`eval_one_epoch`, guardado de `epoch_N/` y `best/`, early stopping. |
 
 ### `src/interpretability/`
-
-> **Estado (2026-06-18):** pipeline de logits Q·K implementado y funcionando. Se usa `cross_att_logits.py` como señal principal. Se está esperando validación del profesor antes de integrarlo en los notebooks 02 y 04. Si no es aceptable, la alternativa es Grad-CAM + encoder attention. Ver `docs/respuesta_profesor_cross_attention.txt` y `docs/cross_att_logits_integracion.md`.
+> **⚠️ Estado:** `cross_att_logits.py` (logits Q·K) es la señal principal pero está **pendiente de
+> validación del profesor**. Si la rechaza → degradar a `cross_attention.py` (post-softmax) +
+> `gradcam.py`. Ver `docs/cross_att_logits_integracion.md`.
 
 | Archivo | Descripción |
 |---|---|
-| `cross_att_logits.py` | **Pipeline principal de interpretabilidad por palabra.** Captura Q y K proyectados vía hooks sobre `crossattention.self.query` y `.key`, calcula `Q·K^T/√d` sin softmax. Produce mapas distintos por palabra, evitando el aplastamiento que causa el softmax sobre 576 tokens. Misma firma de salida que `cross_attention.py`. ⚠️ Pendiente confirmación del profesor de que es válido para el informe. |
-| `cross_attention.py` | Pesos de atención post-softmax vía forward hook sobre `crossattention.self`. Limitación conocida: el softmax sobre 576 patches produce pesos ≈ 1/576 para todos los tokens, resultando en mapas visualmente idénticos entre palabras. Se mantiene como referencia y para documentar la limitación. |
-| `encoder_attention.py` | Auto-atención CLS→patches del encoder ViT (`model.vision_model(..., output_attentions=True)`). Saliencia global de la imagen, no word-specific. Útil para comparar foco visual del encoder antes/después del fine-tuning. |
-| `gradcam.py` | Grad-CAM sobre el encoder ViT usando `pytorch-grad-cam` + `vit_reshape_transform` custom para 24×24 (BLIP usa 384×384, no 224×224). Señal directa de qué regiones contribuyen a la predicción. |
-
----
+| `cross_att_logits.py` | Captura Q y K vía hooks, calcula `Q·K^T/√d` sin softmax → mapas distintos por palabra. `layer_idx=9` por defecto. |
+| `cross_attention.py` | Pesos post-softmax. Limitación: ≈1/576 para todos los patches → mapas planos. Se mantiene como referencia y para la figura metodológica. |
+| `gradcam.py` | Grad-CAM sobre el encoder ViT con `blip_vit_reshape_transform` (577→24×24, no 224×224). |
 
 ### `src/visualization/`
-
 | Archivo | Descripción |
 |---|---|
-| `heatmap.py` | Función `overlay_heatmap(image, heatmap, alpha=0.5)` que normaliza el heatmap a [0,1], aplica colormap `jet` y lo superpone sobre la imagen original en escala de grises. Devuelve una imagen RGB lista para guardar o mostrar. |
-| `comparison_grid.py` | Genera la **figura central de 9 celdas** (3 columnas × 3 filas). Columnas: imagen natural con BLIP base / radiografía con BLIP base / radiografía con BLIP fine-tuneado. Filas: caption generado (texto) / cross-attention heatmap / Grad-CAM heatmap. Guarda el resultado en `outputs/figura_central/grid_9celdas.png`. |
-
----
-
-### `src/metrics/`
-
-| Archivo | Descripción |
-|---|---|
-| `nlg_metrics.py` | Calcula BLEU-4, CIDEr y METEOR comparando los captions generados (usando `findings` o `impression` como referencia) antes y después del fine-tuning. Usa `pycocoevalcap` o `nltk`. Guarda resultados en `outputs/metricas/nlg_antes_despues.csv`. |
-| `spatial_metrics.py` | Para cada imagen y cada palabra, calcula la correlación de Pearson entre el mapa de cross-attention (196 valores) y el mapa de Grad-CAM (196 valores). Agrega por imagen. Guarda en `outputs/metricas/correlacion_espacial.csv`. Si correlación media aumenta post fine-tuning → los dos mecanismos se alinean más. |
-
----
+| `heatmap.py` | `overlay_heatmap`, `plot_word_heatmaps`, `save_heatmap_grid`, `plot_comparison_heatmaps`. Normalización **per-heatmap** (comparar patrón, no intensidad). |
+| `plots.py` | Plots auxiliares (curvas de loss, distribuciones de captions, etc.). |
 
 ### `notebooks/`
+| Notebook | Estado | Descripción |
+|---|---|---|
+| `00_exploracion_dataset.ipynb` | activo | Exploración del HF dataset, filtros, generación de splits. |
+| `005_regenerar_splits.ipynb` | activo | Regeneración de splits con el dataset completo. |
+| `01_calibracion_coco.ipynb` | activo | Parte 1: validar interpretabilidad en imágenes naturales (COCO). |
+| `02_baseline_radiografias.ipynb` | activo | Parte 2: BLIP base sobre las radiografías. |
+| `03_gcp_finetuner.ipynb` | activo | Fine-tuning real en GPU (GCP). `MAX_TRAIN_SAMPLES` define el output dir. |
+| `06_analisis_captions.ipynb` | activo | Análisis de calidad de captions (overlap, diversidad). |
+| `03_finetuning.ipynb` | 📦 viejo | Versión previa del finetuning, reemplazada por `03_gcp_finetuner.ipynb`. |
+| `debug_cross_attention.ipynb` | 🧪 transitorio | Debug del post-softmax aplanado. |
+| `prueba_finetuning.ipynb` | 🧪 transitorio | Pruebas sueltas de finetuning. |
+| `00_analisis_resultados.md` | nota | Notas sueltas de resultados (no es notebook). |
+| `07_explicabilidad_comparada.ipynb` | **a crear** | Pipeline comparativo (ver `NOTEBOOK_COMPARATIVO.md`). |
 
-| Notebook | Descripción |
+### `archivos_ion/` — 🧪 experimentos de mode collapse (debug)
+Scripts y notebooks de las sesiones D1–D3 y S1. Útiles como referencia, **no** parte del pipeline
+final. Generan outputs en `outputs/mode_collapse_debug/`, `outputs/decoding_sampling/`, etc.
+
+| Archivo | Qué hace |
 |---|---|
-| `00_exploracion_dataset.ipynb` | Carga el HF dataset, inspecciona distribución de longitud de `findings` e `impression`, muestra ejemplos de imagen+texto, filtra filas con campos vacíos, y llama a `split_generator.py` para crear los splits. Punto de entrada del proyecto. |
-| `01_calibracion_coco.ipynb` | **Parte 1.** Carga BLIP base, corre cross-attention + Grad-CAM sobre las 20–30 imágenes de COCO, genera figuras y verifica visualmente que los heatmaps apuntan a los objetos correctos para cada palabra del caption. |
-| `02_baseline_radiografias.ipynb` | **Parte 2.** Carga BLIP base, corre el mismo pipeline sobre las 20–30 radiografías de `selected_indices.json`. Documenta captions generados y (in)coherencia médica de los heatmaps. Establece el baseline. |
-| `03_finetuning.ipynb` | Fine-tuning de BLIP sobre los 10.000 pares de `splits/train_indices.json`. Se ejecuta en la nube (Kaggle con GPU T4 o Google Cloud con L4). Monitorea val loss por época y guarda checkpoints. |
-| `04_analisis_postft.ipynb` | **Parte 3.** Carga `models/blip_finetuned/best/`, corre el pipeline sobre las *mismas* radiografías de `selected_indices.json`. Genera la figura comparativa antes/después para cada imagen. |
-| `05_resultados_y_metricas.ipynb` | Calcula BLEU-4, CIDEr, METEOR y correlación espacial. Genera tablas y figuras listas para el informe. Genera `grid_9celdas.png`. |
+| `run_s1_decoding_experiment.py` | S1: 6 estrategias de decoding (greedy, temperatura, etc.). |
+| `run_d1_checkpoint_collapse.py` | D1: collapse por checkpoint (epoch_1/2/3/best). |
+| `run_d2_token_probe.py` | D2: distribuciones token a token (entropía, top1/top2). |
+| `run_d3_heatmap_probe.py` | D3: heatmaps cross-att + Grad-CAM, base vs FT. **Base del notebook 07.** |
+| `06–09_debug_*.ipynb` | Versiones notebook de los experimentos D/S. |
+| `comandos.md`, `*_handoff_*.md`, `explicacion_*.md` | Comandos y explicaciones de cada experimento. |
+
+### `analisis/` — hallazgos para el paper (vigente)
+| Archivo | Contenido |
+|---|---|
+| `01_mode_collapse_s1_d2.md` | Diagnóstico y solución del collapse (T=1.2). |
+| `02_captions_10k.md` | Calidad de captions del modelo 10k. |
+| `03_hallazgos_paper.md` | Síntesis para el informe IEEE (figuras, referencias). |
+| `04_analisis_pendiente.md` | Qué falta (post-softmax vs logits, D3, por token). |
+
+### `docs/` — documentación técnica
+`blip_modelo.md`, `interpretabilidad.md`, `finetuning_tecnico.md`, `guia_finetuning_gcp.md`,
+`mejoras_mode_collapse.md`, `cross_att_logits_integracion.md`, `reporte_ion.md`.
+
+### `../gcp/` (fuera de image-captioning) — infraestructura de la VM
+`1_setup_gcloud.sh`, `2_create_vm.py`, `3_setup_vm.sh`, `4_guia_vm.md`, `run_temp_sampling.py`
+(genera captions T=1.2/T=1.5). Necesario para reentrenar; no para el análisis local.
 
 ---
 
-### `outputs/`
+## Contenido gitignoreado — paths que NO están en el repo
 
-| Carpeta / Archivo | Descripción |
-|---|---|
-| `parte1_coco/` | Figuras de calibración: imagen original + heatmaps de cross-attention y Grad-CAM por palabra, en imágenes naturales. |
-| `parte2_baseline/` | Las mismas figuras sobre las 20–30 radiografías seleccionadas con BLIP base. |
-| `parte3_finetuned/` | Las mismas figuras sobre las *mismas* radiografías pero con BLIP fine-tuneado. Se comparan directamente con `parte2_baseline/`. |
-| `figura_central/grid_9celdas.png` | La figura 3×3 que resume visualmente todo el trabajo. Es la pieza central del poster. |
-| `metricas/nlg_antes_despues.csv` | BLEU-4, CIDEr, METEOR antes y después del fine-tuning. |
-| `metricas/correlacion_espacial.csv` | Correlación cross-attention vs Grad-CAM por imagen y por palabra, antes y después del fine-tuning. |
+> **Para quien clona el repo:** `models/` y `outputs/` están **gitignoreados** (pesos = cientos
+> de MB, outputs = regenerables). Acá quedan documentados los paths y qué va en cada uno, para
+> poder ubicarse sin tener los archivos. Los pesos se regeneran corriendo el fine-tuning
+> (`notebooks/03_gcp_finetuner.ipynb`) o se copian aparte; los outputs se regeneran corriendo
+> los notebooks. **No hace falta pushear nada de esto.**
 
----
-
-### Archivos raíz
-
-| Archivo | Descripción |
-|---|---|
-| `README.md` | Descripción del proyecto e instrucciones para reproducir todos los experimentos. Incluye el comando `load_dataset(...)` para descargar los datos. |
-| `requirements.txt` | `transformers`, `datasets`, `torch`, `torchvision`, `pytorch-grad-cam`, `nltk`, `pycocoevalcap`, `matplotlib`, `numpy`, `pandas`, `Pillow` |
-| `.gitignore` | Excluye: `data/hf_cache/`, `models/blip_base/`, `models/blip_finetuned/`, `outputs/`, `__pycache__/`, `.ipynb_checkpoints/` |
-
----
-
-## Orden de ejecución recomendado
-
+Cada **checkpoint** (carpeta `best/`, `epoch_N/`) contiene los 6 archivos estándar de HuggingFace:
 ```
-1. Instalar dependencias               →  pip install -r requirements.txt
-2. Explorar y preparar datos           →  notebooks/00_exploracion_dataset.ipynb
-                                          (genera splits/ y selected_indices.json)
-3. Descargar BLIP base                 →  src/models/blip_loader.py (auto al primer import)
-4. Calibrar herramientas               →  notebooks/01_calibracion_coco.ipynb  (local)
-5. Baseline en radiografías            →  notebooks/02_baseline_radiografias.ipynb  (local)
-6. Fine-tuning                         →  notebooks/03_finetuning.ipynb  (Kaggle / Google Cloud)
-7. Análisis post fine-tuning           →  notebooks/04_analisis_postft.ipynb  (local)
-8. Métricas y figuras finales          →  notebooks/05_resultados_y_metricas.ipynb  (local)
-9. Redactar informe y poster           →  informe/ y poster/
+<checkpoint>/
+├── config.json
+├── generation_config.json
+├── model.safetensors          ← los pesos (~900 MB, gitignoreado)
+├── processor_config.json
+├── tokenizer_config.json
+└── tokenizer.json
 ```
+
+#### `models/` (gitignoreado)
+```
+models/
+├── blip_base/                      ← BLIP preentrenado (Salesforce/blip-image-captioning-base)
+├── blip_finetuned_10k/             ← fine-tuning con 10.000 pares (el modelo principal)
+│   ├── best/                       ← mejor val loss (= epoch_3). El que se usa en el análisis.
+│   ├── epoch_1/
+│   ├── epoch_2/
+│   └── epoch_3/
+└── blip_finetuned/best/            ← 🧪 LEGACY / vacío. No usar.
+
+# El modelo de 5.000 pares NO está dentro de models/. Vive FUERA del repo en:
+../output_5k/best/                  ← checkpoint 5k (ruta relativa a image-captioning/)
+```
+
+> **Nota de nombres:** el plan original hablaba de `models/blip_finetuned/best`; en la práctica
+> los modelos quedaron en `models/blip_finetuned_10k/` (10k) y `../output_5k/best` (5k, externo).
+> Quien reentrene puede consolidar el 5k en `models/blip_finetuned_5k/best` si quiere todo junto.
+
+#### `outputs/` (gitignoreado)
+```
+outputs/
+├── parte1_coco/                    ← Parte 1: captions + figura de calibración (COCO)
+├── parte2_baseline/                ← Parte 2: captions + comparacion_<idx>.png (BLIP base, radiografías)
+├── captions/                       ← captions base vs ft 5k (greedy) + distribución
+├── captions_10k/captions/          ← captions base vs ft 10k (greedy)
+├── prueba_mas_temp/                ← captions T=1.2 y T=1.5 (600 imgs) — JSON {idx, generated, reference}
+├── decoding_sampling/              ← experimento S1 (6 estrategias de decoding)
+│   ├── s1_selected_30/             ← S1 sobre selected_indices (csv resúmenes + png)
+│   └── s1_10k/                     ← S1 sobre el modelo 10k
+├── mode_collapse_debug/            ← experimento D2 (distribuciones token a token, csv/json)
+├── finetuning/                     ← curva de loss del entrenamiento (loss_curve_5k.png)
+├── dataset_checks/                 ← verificación de dataset/dataloader
+└── notebook_comparativo/           ← (A GENERAR) pipeline de explicabilidad — ver NOTEBOOK_COMPARATIVO.md
+    ├── captions/captions_bestof3.json
+    ├── heatmaps/idx_<NNN>/<modelo>/{original,post_softmax_grid,gradcam_grid,qk_logits_grid,explanation}.png
+    ├── arrays/idx_<NNN>__<modelo>__<metodo>.npz
+    ├── metrics/{spatial_per_token,spatial_summary}.csv
+    ├── figures_paper/{postsoftmax_vs_logits,comparativa_modelos_idx<NNN>}.png
+    └── summary.csv
+```
+
+> **Índices del análisis visual:** los heatmaps usan `data/visual_test_indices.json` (25
+> radiografías fijas, sí versionado). `selected_indices.json` (30 imgs) es un set distinto, sin
+> overlap. Ver `HOJA_DE_RUTA.md` y `NOTEBOOK_COMPARATIVO.md` para el detalle del pipeline nuevo.
+
+---
+
+## Estado actual del trabajo (resumen)
+
+| Fase | Estado |
+|---|---|
+| Pipeline de datos + splits | ✅ completo |
+| Carga de modelo | ✅ completo |
+| Fine-tuning 5k y 10k | ✅ hecho (collapse resuelto con T=1.2, ver `analisis/01`) |
+| Interpretabilidad (3 métodos) | ✅ implementada (logits Q·K pendiente de profesor) |
+| Notebook comparativo (07) | ⏳ a crear — ver `NOTEBOOK_COMPARATIVO.md` |
+| Métricas (`src/metrics/`) | ⏳ a crear (espaciales + calidad de caption) |
+| Redacción del paper | ⏳ pendiente — base en `analisis/03` |
 
 ---
 
 ## Nota sobre el campo de texto a usar
 
-El dataset tiene dos campos de texto:
-
-| Campo | Contenido | Longitud típica | Uso |
+| Campo | Contenido | Largo | Uso |
 |---|---|---|---|
-| `findings` | Descripción detallada hallazgo por hallazgo | Larga (hasta 1.5k chars) | No usar como target — demasiado larga para el estilo de BLIP |
-| `impression` | Conclusión clínica resumida | Corta (1–3 oraciones) | **Target del fine-tuning** y referencia para BLEU/CIDEr/METEOR |
+| `findings` | Hallazgo por hallazgo | Largo (≤1.5k chars) | No usar como target — demasiado largo para BLIP |
+| `impression` | Conclusión clínica | Corto (1–3 oraciones) | **Target del fine-tuning** y referencia de métricas |
 
 ---
 
-## Resultados esperados
+## Resultados esperados (tres escenarios, todos válidos)
 
-El trabajo puede concluir en uno de tres escenarios, todos igualmente válidos como contribución:
+- **A** — Captions mejoran *y* heatmaps se vuelven médicamente coherentes → lenguaje y visión se adaptan juntos.
+- **B** — Captions mejoran *pero* heatmaps no cambian → solo se adapta el lenguaje.
+- **C** — Heatmaps cambian pero no hacia zonas relevantes → la atención se reorganiza sin coherencia clínica.
 
-- **Resultado A** — Captions mejoran *y* heatmaps se vuelven médicamente coherentes → el fine-tuning adapta lenguaje y visión simultáneamente.
-- **Resultado B** — Captions mejoran *pero* heatmaps no cambian significativamente → el modelo aprendió vocabulario médico pero sigue mirando las mismas zonas.
-- **Resultado C** — Heatmaps cambian pero no hacia zonas médicamente relevantes → el fine-tuning reorganiza la atención sin coherencia clínica.
+> Hallazgo provisional (ver `analisis/03`): **tipo A parcial** — el FT adapta visión y lenguaje;
+> el collapse con greedy es un artefacto de decodificación, no un fallo de aprendizaje.
