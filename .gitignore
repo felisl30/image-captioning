@@ -50,3 +50,10 @@ __pycache__/
 outputs/single_image_compare/
 outputs/notebook_comparativo/
 data/hf_cache/
+
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+outputs/single_image_compare/
+outputs/notebook_comparativo/
+data/hf_cache/
