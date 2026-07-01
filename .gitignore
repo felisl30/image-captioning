@@ -43,3 +43,10 @@ data/backups/
 # ── Sistema ───────────────────────────────────────────────────────────────────
 .DS_Store
 Thumbs.db
+
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+outputs/single_image_compare/
+outputs/notebook_comparativo/
+data/hf_cache/
